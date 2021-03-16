@@ -49,6 +49,12 @@ async def idcall(ctx, *, test: discord.TextChannel):
 	await ctx.send(f"Here's your mentioned channel ID: {chanID}")
 
 @bot.command()
+async def send(ctx, *args):
+	channel = bot.get_channel(args[0])
+	await channel.send(f"{args[1}")
+
+
+@bot.command()
 async def ping(ctx):
 	await ctx.send('boop')
 #	channel = bot.get_channel(787078050679488512)
