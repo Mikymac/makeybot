@@ -36,17 +36,21 @@ def restart_program():
 	os.execl(python, python, * sys.argv)
 
 @bot.command()
+@commands.is_owner()
 async def update(ctx):
 	repo = git.Repo('./')
 	print("Pre pull")
 	repo.git.pull()
 	print("Post Pull")
 	restart_program()
+	await ctx.message.delete()
 
 @bot.command()
+@commands.is_owner()
 async def idcall(ctx, *, test: discord.TextChannel):
 	chanID = test.id
 	await ctx.send(f"Here's the channel ID for {test}: {chanID}")
+	await ctx.message.delete()
 
 @bot.command()
 async def send(ctx, channel: discord.TextChannel, *, arg):
@@ -54,13 +58,6 @@ async def send(ctx, channel: discord.TextChannel, *, arg):
 	await ctx.message.delete()
 	await channel.send(arg)
 	print(arg)
-
-
-
-
-
-
-
 
 @bot.command()
 async def ping(ctx):
@@ -70,24 +67,30 @@ async def ping(ctx):
 	print ('pong')
 
 @bot.command()
+@commands.is_owner()
 async def here(ctx):
 	await ctx.send(f'{ctx.message.author} is at the space')
+	await ctx.message.delete()
 
 @bot.command()
+@commands.is_owner()
 async def on(ctx):
 	openings= bot.get_channel(787078050679488512)
 	await ctx.send('On')
 	await openings.edit(name="Open")
 	on = True
 	GPIO.output(21, True)
+	await ctx.message.delete()
 
 @bot.command()
+@commands.is_owner()
 async def off(ctx):
 	openings= bot.get_channel(787078050679488512)
 	await ctx.send('Off')
 	on = False
 	GPIO.output(21, False)
 	await openings.edit(name="Closed")
+	await ctx.message.delete()
 
 async def task():
 	global on
