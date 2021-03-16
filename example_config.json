@@ -1,0 +1,7 @@
+
+#rename file to config.json
+
+{
+	"TOKEN": "super secret token ID here"
+	
+}
