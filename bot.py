@@ -14,7 +14,6 @@ GPIO.output(21, False)
 GPIO.output(16, False)
 GPIO.output(26, False)
 
-TOKEN = 'Njc0ODE3Njk2ODI2Nzg1Nzky.XjuG9A.v48TAMYVUXYFQRHY2Xuh3Zv5tm8'
 
 bot = commands.Bot(command_prefix='!')
 
