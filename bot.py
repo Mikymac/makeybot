@@ -8,7 +8,7 @@ import git
 with open("config.json") as conf:
 	data = json.load(conf)
 
-#TEST
+#TEST numero dos
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
