@@ -3,6 +3,8 @@ import discord
 from discord.ext import commands, tasks
 import asyncio
 
+#TEST
+
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 GPIO.setup(21, GPIO.OUT)
