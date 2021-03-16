@@ -39,6 +39,7 @@ async def update(ctx):
 	print("Pre pull")
 	repo.git.pull()
 	print("Post Pull")
+	restart_program()
 
 @bot.command()
 async def ping(ctx):
