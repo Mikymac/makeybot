@@ -46,7 +46,7 @@ async def update(ctx):
 @bot.command()
 @commands.is_owner()
 async def channel(ctx, channel: discord.TextChannel):
-	await ctx.send(f"Channel ID: {channel.id}")
+	await ctx.send(f"Here's your mentioned channel ID: {channel.id}")
 
 @bot.command()
 async def ping(ctx):
