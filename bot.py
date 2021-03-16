@@ -50,7 +50,7 @@ async def idcall(ctx, *, test: discord.TextChannel):
 
 @bot.command()
 async def send(ctx, *args):
-	channel = bot.get_channel(args[0])
+	channel = bot.get_channel(821380948712489010)
 	await channel.send("Mikymac said")
 
 
