@@ -95,9 +95,9 @@ async def off(ctx):
 @bot.command()
 async def freebeer(ctx):
 	if(ctx.message.author.id == 220696408171347968):
-		await ctx.send("Here you go {ctx.author.name}, 1 free beer")
+		await ctx.send(f'Here you go {ctx.author.name}, 1 free beer')
 	else:
-		await ctx.send("I'm sorry {ctx.author.name}, beer is not free. You must purchase your own.")
+		await ctx.send(f"I'm sorry {ctx.author.name}, beer is not free. You must purchase your own.")
 
 
 
