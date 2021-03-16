@@ -38,12 +38,12 @@ def restart_program():
 @bot.command()
 @commands.is_owner()
 async def update(ctx):
+	await ctx.message.delete()
 	repo = git.Repo('./')
 	print("Pre pull")
 	repo.git.pull()
 	print("Post Pull")
 	restart_program()
-	await ctx.message.delete()
 
 @bot.command()
 @commands.is_owner()
