@@ -51,6 +51,7 @@ async def idcall(ctx, *, test: discord.TextChannel):
 @bot.command()
 async def send(ctx, channel: discord.TextChannel, *, arg):
 	#channel = discord.utils.get(ctx.guild.channels, name=args[0])
+	await ctx.message.delete()
 	await channel.send(arg)
 
 
