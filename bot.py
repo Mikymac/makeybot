@@ -44,7 +44,6 @@ async def update(ctx):
 	restart_program()
 
 @bot.command()
-@commands.is_owner()
 async def channel(ctx, channel: discord.TextChannel):
 	chanID = channel.id
 	await ctx.send(f"Here's your mentioned channel ID: {chanID}")
