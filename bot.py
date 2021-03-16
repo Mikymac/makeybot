@@ -44,6 +44,11 @@ async def update(ctx):
 	restart_program()
 
 @bot.command()
+@commands.is_owner()
+async def channel(ctx, channel: discord.TextChannel):
+	await ctx.send(f"Channel ID: {channel.id}")
+
+@bot.command()
 async def ping(ctx):
 	await ctx.send('boop')
 #	channel = bot.get_channel(787078050679488512)
