@@ -45,7 +45,7 @@ async def update(ctx):
 
 @bot.command()
 async def ping(ctx):
-	await ctx.send('pong')
+	await ctx.send('boop')
 #	channel = bot.get_channel(787078050679488512)
 #	await channel.edit(name="TestName")
 	print ('pong')
