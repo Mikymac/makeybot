@@ -134,8 +134,8 @@ async def led_update():
 @bot.event
 async def on_ready():
 	print ("Ready To Go")
-	curDoor = False
-	doorOpen = False
+	curDoor = True
+	doorOpen = True
 	bot.loop.create_task(task())
 
 bot.run(TOKEN)
