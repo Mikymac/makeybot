@@ -99,7 +99,6 @@ async def freebeer(ctx):
 	else:
 		await ctx.send(f"I'm sorry {ctx.author.display_name}, beer is not free. You must purchase your own.")
 
-@bot.command()
 
 
 async def task():
