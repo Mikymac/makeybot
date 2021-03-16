@@ -50,7 +50,7 @@ async def idcall(ctx, *, test: discord.TextChannel):
 
 @bot.command()
 async def send(ctx, *args):
-	channel = discord.utils.get(ctx.guild.channels, name=arg[0])
+	channel = discord.utils.get(ctx.guild.channels, name=args[0])
 	del args[0]
 	await channel.send('{} arguments: {}'.format(len(args), ', '.join(args)))
 
