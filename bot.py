@@ -51,7 +51,7 @@ async def idcall(ctx, *, test: discord.TextChannel):
 @bot.command()
 async def send(ctx, *args):
 	channel = bot.get_channel(args[0])
-	await channel.send(f"{args[1}")
+	await channel.send(f"Mikymac said: {args[1}")
 
 
 @bot.command()
