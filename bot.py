@@ -46,7 +46,7 @@ async def update(ctx):
 @bot.command()
 async def idcall(ctx, *, test: discord.TextChannel):
 	chanID = test.id
-	await ctx.send(f"Here's your mentioned channel ID: {chanID}")
+	await ctx.send(f"Here's the channel ID for {test}: {chanID}")
 
 @bot.command()
 async def send(ctx, channel: discord.TextChannel, *, arg):
@@ -64,7 +64,7 @@ async def send(ctx, channel: discord.TextChannel, *, arg):
 
 @bot.command()
 async def ping(ctx):
-	await ctx.send('boop')
+	await ctx.send('pong')
 #	channel = bot.get_channel(787078050679488512)
 #	await channel.edit(name="TestName")
 	print ('pong')
