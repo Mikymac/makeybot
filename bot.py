@@ -29,6 +29,10 @@ on = False
 curDoor = False
 doorOpen = False
 
+def restart_program():
+	python = sys.executable
+	os.execl(python, python, * sys.argv)
+
 @bot.command()
 async def update(ctx):
 	repo = git.Repo('./')
