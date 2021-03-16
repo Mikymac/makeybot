@@ -5,7 +5,7 @@ import asyncio
 import json
 import git
 import os
-
+import sys
 
 with open("config.json") as conf:
 	data = json.load(conf)
