@@ -8,6 +8,8 @@ import git
 with open("config.json") as conf:
 	data = json.load(conf)
 
+#TEST
+
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 GPIO.setup(21, GPIO.OUT)
