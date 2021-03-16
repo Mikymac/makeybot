@@ -49,9 +49,9 @@ async def idcall(ctx, *, test: discord.TextChannel):
 	await ctx.send(f"Here's your mentioned channel ID: {chanID}")
 
 @bot.command()
-async def send(ctx, *args):
-	channel = bot.get_channel(821380948712489010)
-	await channel.send("Mikymac said")
+async def send(ctx, *, channel: discord.TextChannel, message):
+	await channel.send(message)
+
 
 
 @bot.command()
