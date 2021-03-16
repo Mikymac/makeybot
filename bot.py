@@ -94,6 +94,7 @@ async def off(ctx):
 
 @bot.command()
 async def freebeer(ctx):
+	await ctx.message.delete()
 	print(message.author.id)
 
 
