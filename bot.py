@@ -4,6 +4,8 @@ from discord.ext import commands, tasks
 import asyncio
 import json
 import git
+import os
+
 
 with open("config.json") as conf:
 	data = json.load(conf)
