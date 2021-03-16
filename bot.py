@@ -107,10 +107,12 @@ async def task():
 		if(doorOpen != curDoor):
 			curDoor = doorOpen
 			if(curDoor == True):
-				await openings.send("Open")
+				print("Open")
+				#await openings.send("Open")
 				#await openings.edit(name="Open")
 			else:
-				await openings.send("Closed")
+				print("Cloased")
+				#await openings.send("Closed")
 				#await openings.edit(name="Closed")
 					
 					
