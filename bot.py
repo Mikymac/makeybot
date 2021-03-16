@@ -2,6 +2,11 @@ import RPi.GPIO as GPIO
 import discord
 from discord.ext import commands, tasks
 import asyncio
+import json
+import git
+
+with open("config.json") as conf:
+	data = json.load(conf)
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
@@ -14,12 +19,20 @@ GPIO.output(21, False)
 GPIO.output(16, False)
 GPIO.output(26, False)
 
+TOKEN = data["TOKEN"]
 
 bot = commands.Bot(command_prefix='!')
 
 on = False
 curDoor = False
 doorOpen = False
+
+@bot.command()
+async def update(ctx):
+	repo = git.Repo('./')
+	print("Pre pull")
+	repo.git.pull()
+	print("Post Pull")
 
 @bot.command()
 async def ping(ctx):
