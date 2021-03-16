@@ -44,7 +44,7 @@ async def update(ctx):
 	restart_program()
 
 @bot.command()
-async def idcall(ctx, *, test: discord.TextChannel):
+async def idcall(ctx, *, test: TextChannel):
 	chanID = test.id
 	await ctx.send(f"Here's your mentioned channel ID: {chanID}")
 
