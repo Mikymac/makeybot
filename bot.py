@@ -92,6 +92,11 @@ async def off(ctx):
 	await openings.edit(name="Closed")
 	await ctx.message.delete()
 
+@bot.command()
+async def freebeer(ctx):
+	print(message.author.id)
+
+
 async def task():
 	global on
 	global curDoor
