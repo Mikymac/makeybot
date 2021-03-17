@@ -94,7 +94,10 @@ async def off(ctx):
 
 @bot.command()
 async def freebeer(ctx):
-	if(ctx.message.author.id == 220696408171347968 or ctx.message.author.id == 754070539001397408):
+	role = discord.utils.find(lambda r: r.name == "Admin", ctx.message.server.roles)
+	if(role in ctx.message.author):
+		await ctx.send("Cheese")
+	elif(ctx.message.author.id == 220696408171347968 or ctx.message.author.id == 754070539001397408):
 		await ctx.send(f'Here you go {ctx.author.display_name}, 1 free beer')
 	else:
 		await ctx.send(f"I'm sorry {ctx.author.display_name}, beer is not free. You must purchase your own.")
