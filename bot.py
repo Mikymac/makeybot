@@ -78,7 +78,7 @@ async def here(ctx):
 @bot.command()
 @commands.is_owner()
 async def on(ctx):
-	openings= bot.get_channel(787078050679488512)
+	openings= bot.get_channel(821487484071444490)
 	await ctx.send('On')
 	await openings.edit(name="Open")
 	on = True
@@ -89,7 +89,7 @@ async def on(ctx):
 @bot.command()
 @commands.is_owner()
 async def off(ctx):
-	openings= bot.get_channel(787078050679488512)
+	openings= bot.get_channel(821487484071444490)
 	await ctx.send('Off')
 	on = False
 	GPIO.output(21, False)
