@@ -109,7 +109,7 @@ async def free(ctx, *, item):
 	rand = random.randint(0,99)
 	print(rand)
 	if(rand == 0):
-		await ctx.send(f'Here you go {ctx.author.display_name} one {item}')
+		await ctx.send(f'Here you go {ctx.author.display_name} 1 free {item}')
 	else:
 		await ctx.send(f"I'm sorry {ctx.author.display_name}, {item} is not free. You must purchase your own." )
 
