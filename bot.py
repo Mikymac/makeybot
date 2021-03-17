@@ -94,7 +94,7 @@ async def off(ctx):
 
 @bot.command()
 async def freebeer(ctx):
-	role = discord.utils.find(ctx.guild.roles, name="Admin")
+	role = discord.utils.find(lambda r: r.name == "Admin",ctx.guild.roles)
 	if(role in ctx.author.roles):
 		await ctx.send("Cheese")
 	elif(ctx.message.author.id == 220696408171347968 or ctx.message.author.id == 754070539001397408):
