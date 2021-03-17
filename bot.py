@@ -119,7 +119,7 @@ async def task():
 	global curDoor
 	global doorOpen
 	
-	openings= bot.get_channel(787078050679488512)
+	openings= bot.get_channel(821487484071444490)
 	while True:
 		if (GPIO.input(20) == 0):
 			doorOpen = True
