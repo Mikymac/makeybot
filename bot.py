@@ -6,6 +6,7 @@ import json
 import git
 import os
 import sys
+import random
 
 with open("config.json") as conf:
 	data = json.load(conf)
@@ -84,6 +85,7 @@ async def on(ctx):
 	GPIO.output(21, True)
 	await ctx.message.delete()
 
+
 @bot.command()
 @commands.is_owner()
 async def off(ctx):
@@ -101,6 +103,16 @@ async def freebeer(ctx):
 	else:
 		await ctx.send(f"I'm sorry {ctx.author.display_name}, beer is not free. You must purchase your own.")
 
+		
+@bot.command()
+async def free(ctx, *, item):
+	rand = random.randint(0,99)
+	print(rand)
+
+	if(rand == 0):
+		await ctx.send(f'Here you go {ctx.author.display_name} one {item.capitilize}')
+	else:
+		await ctx.send(f"I'm sorry {ctx.author.display_name}, {item.capitilize()} is not free. You must purchase your own." )
 
 
 async def task():
