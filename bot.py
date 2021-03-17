@@ -54,10 +54,12 @@ async def idcall(ctx, *, test: discord.TextChannel):
 
 @bot.command()
 async def send(ctx, channel: discord.TextChannel, *, arg):
+	role = discord.utils.find(lambda r: r.name == "Admin",ctx.guild.roles)
+	if(role in ctx.author.roles or ctx.message.author.id == 220696408171347968):
 	#channel = discord.utils.get(ctx.guild.channels, name=args[0])
-	await ctx.message.delete()
-	await channel.send(arg)
-	print(arg)
+		await ctx.message.delete()
+		await channel.send(arg)
+		print(arg)
 
 @bot.command()
 async def ping(ctx):
@@ -94,10 +96,7 @@ async def off(ctx):
 
 @bot.command()
 async def freebeer(ctx):
-	role = discord.utils.find(lambda r: r.name == "Admin",ctx.guild.roles)
-	if(role in ctx.author.roles):
-		await ctx.send("Cheese")
-	elif(ctx.message.author.id == 220696408171347968 or ctx.message.author.id == 754070539001397408):
+	if(ctx.message.author.id == 220696408171347968 or ctx.message.author.id == 754070539001397408):
 		await ctx.send(f'Here you go {ctx.author.display_name}, 1 free beer')
 	else:
 		await ctx.send(f"I'm sorry {ctx.author.display_name}, beer is not free. You must purchase your own.")
