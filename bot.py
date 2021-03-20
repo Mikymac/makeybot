@@ -113,6 +113,11 @@ async def free(ctx, *, item):
 	else:
 		await ctx.send(f"I'm sorry {ctx.author.display_name}, {item} is not free. You must purchase your own." )
 
+@bot.command()
+async def opentest(ctx):
+	global curDoor
+
+	await ctx.send(curDoor)
 
 async def task():
 	global on
