@@ -116,7 +116,7 @@ async def free(ctx, *, item):
 @bot.command()
 async def opentest(ctx):
 	global curDoor
-
+	await ctx.send("Test")
 	await ctx.send(curDoor)
 
 async def task():
