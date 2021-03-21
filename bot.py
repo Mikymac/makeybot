@@ -64,7 +64,7 @@ async def send(ctx, channel: discord.TextChannel, *, arg):
 
 @bot.command()
 async def ping(ctx):
-	await ctx.send('pong')
+	await ctx.send('polo')
 #	channel = bot.get_channel(787078050679488512)
 #	await channel.edit(name="TestName")
 	print ('pong')
