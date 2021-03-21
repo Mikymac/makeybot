@@ -40,7 +40,7 @@ def restart_program():
 @commands.is_owner()
 async def update(ctx):
 	await ctx.message.delete()
-	repo = git.Repo('./')
+	repo = git.Repo('/home/pi/makeybot/')
 	print("Pre pull")
 	repo.git.pull()
 	print("Post Pull")
