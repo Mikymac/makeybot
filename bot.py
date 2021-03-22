@@ -39,6 +39,7 @@ def restart_program():
 @bot.command()
 @commands.is_owner()
 async def update(ctx):
+	await audit("I have initiated an Update, please await the online command.")
 	await ctx.message.delete()
 	repo = git.Repo('/home/pi/makeybot/')
 	print("Pre pull")
@@ -59,8 +60,11 @@ async def send(ctx, channel: discord.TextChannel, *, arg):
 	if(role in ctx.author.roles or ctx.message.author.id == 220696408171347968):
 	#channel = discord.utils.get(ctx.guild.channels, name=args[0])
 		#await ctx.message.delete()
+		await audit(f'{ctx.author.display_name} used the send command to say {arg} in channel: {channel}')
 		await channel.send(arg)
 		print(arg)
+	else:
+		await audit(f'{ctx.author.display_name} attempted to use the send command.')
 
 @bot.command()
 async def purge(ctx):
@@ -113,12 +117,14 @@ async def freebeer(ctx):
 async def free(ctx, *, item):
 	rand = random.randint(0,99)
 	print(rand)
+	await audit(f'The number rolled was: {rand}')
 	if(rand <= 10):
 		await ctx.send(f'Here you go {ctx.author.display_name} 1 free {item}')
 	else:
 		await ctx.send(f"I'm sorry {ctx.author.display_name}, {item} is not free. You must purchase your own." )
 
 @bot.command()
+@commands.is_owner()
 async def opentest(ctx):
 	global curDoor
 	await ctx.send("Test")
@@ -169,10 +175,13 @@ async def led_update():
 		on = True
 		await openings.edit(name="Closed")
 
+async def audit(message):	
+	await bot.get_channel(822257199438888960).send(message)
+
 @bot.event
 async def on_ready():
 	print ("Ready To Go")
-	await bot.get_channel(822257199438888960).send("*Beep Beep* MakeyBot OnLine")
+	await audit("*Beep Beep* MakeyBot OnLine")
 	curDoor = True
 	doorOpen = True
 	bot.loop.create_task(task())
