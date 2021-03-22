@@ -18,7 +18,7 @@ GPIO.setwarnings(False)
 GPIO.setup(21, GPIO.OUT)
 GPIO.setup(16, GPIO.OUT)
 GPIO.setup(26, GPIO.OUT)
-GPIO.setup(20, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+GPIO.setup(20, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
 GPIO.output(21, False)
 GPIO.output(16, False)
