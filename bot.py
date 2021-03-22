@@ -63,6 +63,11 @@ async def send(ctx, channel: discord.TextChannel, *, arg):
 		print(arg)
 
 @bot.command()
+async def purge(ctx):
+	#await bot.get_channel(821487484071444490).purge()
+	await bot.get_channel(821487484071444490).send(f'{ctx.message.author} has purged channel')
+
+@bot.command()
 async def ping(ctx):
 	await ctx.send('polo')
 #	channel = bot.get_channel(787078050679488512)
