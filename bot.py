@@ -172,6 +172,7 @@ async def led_update():
 @bot.event
 async def on_ready():
 	print ("Ready To Go")
+	await bot.get_channel(822257199438888960).send("*Beep Beep* MakeyBot OnLine")
 	curDoor = True
 	doorOpen = True
 	bot.loop.create_task(task())
