@@ -60,7 +60,7 @@ async def send(ctx, channel: discord.TextChannel, *, arg):
 	if(role in ctx.author.roles or ctx.message.author.id == 220696408171347968):
 	#channel = discord.utils.get(ctx.guild.channels, name=args[0])
 		#await ctx.message.delete()
-		await audit(f'{ctx.author.display_name} used the send command to say {arg} in channel: {channel}')
+		await audit(f'{ctx.author.display_name} used the send command to say "{arg}" in channel: {channel}')
 		await channel.send(arg)
 		print(arg)
 	else:
