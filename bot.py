@@ -40,7 +40,7 @@ def restart_program():
 @commands.is_owner()
 async def update(ctx):
 	await ctx.message.delete()
-	repo = git.Repo('./')
+	repo = git.Repo('/home/pi/makeybot/')
 	print("Pre pull")
 	repo.git.pull()
 	print("Post Pull")
@@ -64,7 +64,7 @@ async def send(ctx, channel: discord.TextChannel, *, arg):
 
 @bot.command()
 async def ping(ctx):
-	await ctx.send('pong')
+	await ctx.send('polo')
 #	channel = bot.get_channel(787078050679488512)
 #	await channel.edit(name="TestName")
 	print ('pong')
@@ -99,7 +99,7 @@ async def off(ctx):
 @bot.command()
 async def freebeer(ctx):
 	if(ctx.message.author.id == 220696408171347968 or ctx.message.author.id == 754070539001397408):
-		await ctx.send(f'Here you go {ctx.author.display_name}, 1 free cheesecake')
+		await ctx.send(f'Here you go {ctx.author.display_name}, 2 free cheesecakes')
 	else:
 		await ctx.send(f"I'm sorry {ctx.author.display_name}, beer is not free. You must purchase your own.")
 
