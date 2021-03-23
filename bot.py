@@ -26,7 +26,9 @@ GPIO.output(26, False)
 
 TOKEN = data["TOKEN"]
 
+intents = discord.Intents.all()
 bot = commands.Bot(command_prefix='!')
+
 
 on = False
 curDoor = False
@@ -176,6 +178,10 @@ async def led_update():
 
 async def audit(message):	
 	await bot.get_channel(822257199438888960).send(message)
+
+@bot.event
+async def on_member_join(member):
+	await bot.get_channel(754054010792575180).send(f"Welcome to the MakeGosport Discord server {member.display_name}, feel free to introduce yourself and what are your interests. Firstly, Hi I'm MakeyBot. I'm here to help out around the server automating whats possible to automate, nice to meet you.")
 
 @bot.event
 async def on_ready():
