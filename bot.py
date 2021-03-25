@@ -26,10 +26,11 @@ GPIO.output(26, False)
 
 TOKEN = data["TOKEN"]
 
-intents = discord.Intents.all()
+intents = discord.Intents.default()
 intents.members = True
+#intents.guilds = True
 
-bot = commands.Bot(command_prefix='!')
+bot = commands.Bot(command_prefix='!', intents=intents)
 
 
 on = False
@@ -53,6 +54,13 @@ async def update(ctx):
 
 @bot.command()
 @commands.is_owner()
+async def restart(ctx):
+	await audit("I have initiated a restart, please await the online command.")
+	await ctx.message.delete()
+	restart_program()
+
+@bot.command()
+@commands.is_owner()
 async def idcall(ctx, *, test: discord.TextChannel):
 	chanID = test.id
 	await ctx.send(f"Here's the channel ID for {test}: {chanID}")
@@ -61,7 +69,7 @@ async def idcall(ctx, *, test: discord.TextChannel):
 @bot.command()
 async def send(ctx, channel: discord.TextChannel, *, arg):
 	role = discord.utils.find(lambda r: r.name == "Admin",ctx.guild.roles)
-	if(role in ctx.author.roles or ctx.message.author.id == 220696408171347968):
+	if(role in ctx.author.roles or ctx.message.author.id == int(data["debugID"])):
 		await ctx.message.delete()
 		await audit(f'{ctx.author.display_name} used the send command to say "{arg}" in channel: {channel}')
 		await channel.send(arg)
@@ -71,14 +79,12 @@ async def send(ctx, channel: discord.TextChannel, *, arg):
 
 @bot.command()
 async def purge(ctx):
-	await bot.get_channel(821487484071444490).purge()
-	await bot.get_channel(822257199438888960).send(f'{ctx.message.author.display_name} has purged channel')
+	await bot.get_channel(int(data["whosinID"])).purge()
+	await audit(f'{ctx.message.author.display_name} has purged channel')
 
 @bot.command()
 async def ping(ctx):
 	await ctx.send('polo')
-#	channel = bot.get_channel(787078050679488512)
-#	await channel.edit(name="TestName")
 	print ('pong')
 
 @bot.command()
@@ -90,7 +96,7 @@ async def here(ctx):
 @bot.command()
 @commands.is_owner()
 async def on(ctx):
-	openings= bot.get_channel(821487484071444490)
+	openings= bot.get_channel(int(data["openingsID"]))
 	await ctx.send('On')
 	await openings.edit(name="Open")
 	on = True
@@ -101,21 +107,13 @@ async def on(ctx):
 @bot.command()
 @commands.is_owner()
 async def off(ctx):
-	openings= bot.get_channel(821487484071444490)
+	openings= bot.get_channel(int(data["openingsID"]))
 	await ctx.send('Off')
 	on = False
 	GPIO.output(21, False)
 	await openings.edit(name="Closed")
 	await ctx.message.delete()
 
-@bot.command()
-async def freebeer(ctx):
-	if(ctx.message.author.id == 220696408171347968 or ctx.message.author.id == 754070539001397408):
-		await ctx.send(f'Here you go {ctx.author.display_name}, 2 free cheesecakes')
-	else:
-		await ctx.send(f"I'm sorry {ctx.author.display_name}, beer is not free. You must purchase your own.")
-
-		
 @bot.command()
 async def free(ctx, *, item):
 	rand = random.randint(0,99)
@@ -138,7 +136,7 @@ async def task():
 	global curDoor
 	global doorOpen
 	
-	openings= bot.get_channel(821487484071444490)
+	openings = bot.get_channel(int(data["openingsID"]))
 	while True:
 		if (GPIO.input(20) == 0):
 			doorOpen = True
@@ -163,27 +161,28 @@ async def task():
 					
 		await asyncio.sleep(.1)
 
-async def led_update():
-	global on
-	openings= bot.get_channel(787078050679488512)
-
-	if(on == True):
-		GPIO.output(21, True)
-		GPIO.output(16, False)
-		on = False
-		await openings.edit(name="Open")
-	else:
-		GPIO.output(21, False)
-		GPIO.output(16, True)
-		on = True
-		await openings.edit(name="Closed")
+#async def led_update():
+#	global on
+#	openings= bot.get_channel(787078050679488512)
+#
+#	if(on == True):
+#		GPIO.output(21, True)
+#		GPIO.output(16, False)
+#		on = False
+#		await openings.edit(name="Open")
+#	else:
+#		GPIO.output(21, False)
+#		GPIO.output(16, True)
+#		on = True
+#		await openings.edit(name="Closed")
 
 async def audit(message):	
-	await bot.get_channel(822257199438888960).send(message)
+	await bot.get_channel(int(data["auditID"])).send(message)
 
 @bot.event
 async def on_member_join(member):
-	await bot.get_channel(754054010792575180).send(f"Welcome to the MakeGosport Discord server {member.display_name}, feel free to introduce yourself and what are your interests. Firstly, Hi I'm MakeyBot. I'm here to help out around the server automating whats possible to automate, nice to meet you.")
+	print("Test")
+	await bot.get_channel(int(data["introID"])).send(f"Welcome to the MakeGosport Discord server {member.display_name}, feel free to introduce yourself and what are your interests. Firstly, Hi I'm MakeyBot. I'm here to help out around the server automating whats possible to automate, nice to meet you.")
 
 @bot.event
 async def on_ready():
