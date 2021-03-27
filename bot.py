@@ -204,7 +204,7 @@ async def on_ready():
 	await audit("*Beep Beep* MakeyBot OnLine")
 	curDoor = True
 	doorOpen = True
-	sendRegister()
+	await sendRegister()
 	bot.loop.create_task(task())
 
 bot.run(TOKEN)
