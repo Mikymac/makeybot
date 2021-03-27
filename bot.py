@@ -127,7 +127,7 @@ async def free(ctx, *, item):
 	print(rand)
 	await audit(f'The number rolled was: {rand}')
 	if(rand <= 10):
-		await ctx.send(f'Here you go {ctx.author.mention} 1 free {item}')
+		await ctx.send(f'Here you go {ctx.author.display_name} 1 free {item}')
 	else:
 		await ctx.send(f"I'm sorry {ctx.author.display_name}, {item} is not free. You must purchase your own." )
 
@@ -189,7 +189,7 @@ async def audit(message):
 @bot.event
 async def on_member_join(member):
 	print("Test")
-	await bot.get_channel(int(data["introID"])).send(f"Welcome to the MakeGosport Discord server {member.display_name}, feel free to introduce yourself and what are your interests. Firstly, Hi I'm MakeyBot. I'm here to help out around the server automating whats possible to automate, nice to meet you.")
+	await bot.get_channel(int(data["introID"])).send(f"Welcome to the MakeGosport Discord server {member.mention}, feel free to introduce yourself and what are your interests. Firstly, Hi I'm MakeyBot. I'm here to help out around the server automating whats possible to automate, nice to meet you.")
 
 @bot.event
 async def on_ready():
