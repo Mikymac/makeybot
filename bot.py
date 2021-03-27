@@ -8,7 +8,7 @@ import os
 import sys
 import random
 
-with open("config.json", "w+") as conf:
+with open("config.json") as conf:
 	data = json.load(conf)
 
 #TEST numero dos
@@ -142,10 +142,10 @@ async def setcode(ctx, arg):
 @bot.command()
 @commands.is_owner()
 async def newcode(ctx):
-	#with open("config.json", "w+") as conf:
-	data["code"] = []
-	data["code"].append("1234")
-	json.dump(data, conf)
+	with open("config.json", "w+") as test:
+		data["code"] = []
+		data["code"].append("1234")
+		json.dump(data, conf)
 
 @bot.command()
 async def code(ctx):
