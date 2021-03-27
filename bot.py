@@ -144,14 +144,14 @@ async def setcode(ctx, arg):
 async def newcode(ctx):
 
 	data["data"] = "4321"
-	afile = json.open("config.json", "w")
-	json.dump(data, afile)
-	afile.close()
+	#afile = open("config.json", "w")
+	#json.dump(data, afile)
+	#afile.close()
 	
-	#with open("config.json", "w+") as confOut:
+	with open("config.json", "w+") as confOut:
 	#	data["code"] = []
 	#	data["code"].append("1234")
-	#	json.dump(data, confOut)
+		json.dump(data, confOut)
 	print(data)
 
 @bot.command()
