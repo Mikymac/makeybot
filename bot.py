@@ -160,7 +160,7 @@ async def newcode(ctx):
 	#json.dump(data, afile)
 	#afile.close()
 	
-	with open("code.json", "w+") as confOut:
+	with open("code.json", "w") as confOut:
 		#data["code"] = []
 		#test["code"].append("1234")
 		json.dump(test, confOut)
