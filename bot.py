@@ -94,25 +94,27 @@ async def here(ctx):
 	await ctx.message.delete()
 
 @bot.command()
-@commands.is_owner()
 async def open(ctx):
-	openings= bot.get_channel(int(data["openingsID"]))
-	await ctx.send('The Unit is currently Open')
-	await openings.edit(name="🕓Open")
-	on = True
-	GPIO.output(21, True)
-	await ctx.message.delete()
+	keyholder = discord.utils.find(lambda r: r.name == "Keyholder",ctx.guild.roles)
+	if(keyholder in ctx.author.roles or mod in ctx.author.roles ):
+		openings= bot.get_channel(int(data["openingsID"]))
+		await openings.send('The Unit is currently Open')
+		await openings.edit(name="🕓Open")
+		on = True
+		GPIO.output(21, True)
+		await ctx.message.delete()
 
 
 @bot.command()
-@commands.is_owner()
 async def closed(ctx):
-	openings= bot.get_channel(int(data["openingsID"]))
-	await ctx.send('The Unit is currently Closed')
-	on = False
-	GPIO.output(21, False)
-	await openings.edit(name="🕓Closed")
-	await ctx.message.delete()
+	keyholder = discord.utils.find(lambda r: r.name == "Keyholder",ctx.guild.roles)
+	if(keyholder in ctx.author.roles or mod in ctx.author.roles ):
+		openings= bot.get_channel(int(data["openingsID"]))
+		await openings.send('The Unit is currently Closed')
+		on = False
+		GPIO.output(21, False)
+		await openings.edit(name="🕓Closed")
+		await ctx.message.delete()
 
 @bot.command()
 async def free(ctx, *, item):
