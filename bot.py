@@ -160,10 +160,10 @@ async def newcode(ctx):
 	#json.dump(data, afile)
 	#afile.close()
 	
-	with open("config.json", "w+") as confOut:
-		data["code"] = []
-		data["code"].append("1234")
-		json.dump(data, confOut)
+	with open("code.json", "w+") as confOut:
+		#data["code"] = []
+		test["code"].append("1234")
+		json.dump(test, confOut)
 
 @bot.command()
 async def code(ctx):
