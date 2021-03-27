@@ -146,7 +146,7 @@ async def newcode(ctx):
 	#	data["code"] = []
 	#	data["code"].append("1234")
 	#	json.dump(data, confOut)
-	print("ASDASD")
+	print(data)
 
 @bot.command()
 async def code(ctx):

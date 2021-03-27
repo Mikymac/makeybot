@@ -6,6 +6,7 @@
 	"openingsID": "Channel ID for Openings channel",
 	"whosinID": "Channel ID for whosIn Channel",
 	"adminID": "Role ID for admin role",
+	"auditID": "Channel ID for audit channel",
 	"debugID": "Debug ID for user here",
 	"introID": "Channel ID for introductions channel"
 }
