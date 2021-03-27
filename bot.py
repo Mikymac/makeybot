@@ -162,7 +162,7 @@ async def newcode(ctx):
 	
 	with open("code.json", "w+") as confOut:
 		#data["code"] = []
-		test["code"].append("1234")
+		#test["code"].append("1234")
 		json.dump(test, confOut)
 
 @bot.command()
