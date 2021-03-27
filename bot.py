@@ -133,10 +133,14 @@ async def free(ctx, *, item):
 
 @bot.command()
 @commands.is_owner()
-async def opentest(ctx):
-	global curDoor
-	await ctx.send("Test")
-	await ctx.send(curDoor)
+async def setcode(ctx, arg):
+	codeVal["code"] = arg	
+	with open("config.json") as conf:
+		data = json.load(conf)
+
+@bot.command()
+async def code(ctx):
+	print(data["code"])
 
 async def task():
 	global on
