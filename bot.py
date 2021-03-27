@@ -170,8 +170,8 @@ async def task():
 
 async def sendRegister():
 	embedvar = discord.Embed(title="Register", description="Who is present at the space", color=0x00ff00)
-	embedvar.add_field(name"Field1", value = "hi", inline=False)
-	embedvar.add_field(name"Field2", value = "hi2", inline=False)
+	embedvar.add_field(name="Field1", value = "hi", inline=False)
+	embedvar.add_field(name="Field2", value = "hi2", inline=False)
 	await bot.get_channel(int(data["auditID"])).send(embed=embedvar)
 	
 
