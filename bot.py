@@ -168,6 +168,13 @@ async def task():
 					
 		await asyncio.sleep(.1)
 
+async def sendRegister():
+	embedvar = discord.Embed(title="Register", description="Who is present at the space", color=0x00ff00)
+	embedvar.add_field(name"Field1", value = "hi", inline=False)
+	embedvar.add_field(name"Field2", value = "hi2", inline=False)
+	await bot.get_channel(int(data["auditID"])).send(embed=embedvar)
+	
+
 #async def led_update():
 #	global on
 #	openings= bot.get_channel(787078050679488512)
@@ -197,6 +204,7 @@ async def on_ready():
 	await audit("*Beep Beep* MakeyBot OnLine")
 	curDoor = True
 	doorOpen = True
+	sendRegister()
 	bot.loop.create_task(task())
 
 bot.run(TOKEN)
