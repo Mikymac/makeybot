@@ -8,7 +8,7 @@ import os
 import sys
 import random
 
-with open("config.json") as conf:
+with open("config.json", "w+") as conf:
 	data = json.load(conf)
 
 #TEST numero dos
