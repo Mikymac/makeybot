@@ -142,10 +142,11 @@ async def setcode(ctx, arg):
 @bot.command()
 @commands.is_owner()
 async def newcode(ctx):
-	with open("config.json", "w+") as confOut:
-		data["code"] = []
-		data["code"].append("1234")
-		json.dump(data, confOut)
+	#with open("config.json", "w+") as confOut:
+	#	data["code"] = []
+	#	data["code"].append("1234")
+	#	json.dump(data, confOut)
+	print("ASDASD")
 
 @bot.command()
 async def code(ctx):
