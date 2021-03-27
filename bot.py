@@ -136,7 +136,7 @@ async def free(ctx, *, item):
 async def setcode(ctx, arg):
 	data["code"] = arg	
 	with open("code.json") as conf:
-		json.load(conf)
+		json.dump(data, conf)
 
 
 @bot.command()
