@@ -104,7 +104,7 @@ async def open(ctx):
 	if(keyholder in ctx.author.roles or mod in ctx.author.roles ):
 		openings= bot.get_channel(int(data["openingsID"]))
 		await openings.send('The Unit is currently Open')
-		await openings.edit(name="🕓Open")
+		await openings.edit(name="🟢Open")
 		on = True
 		GPIO.output(21, True)
 		await ctx.message.delete()
@@ -118,7 +118,7 @@ async def closed(ctx):
 		await openings.send('The Unit is currently Closed')
 		on = False
 		GPIO.output(21, False)
-		await openings.edit(name="🕓Closed")
+		await openings.edit(name="⛔Closed")
 		await ctx.message.delete()
 
 @bot.command()
