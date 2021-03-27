@@ -134,9 +134,16 @@ async def free(ctx, *, item):
 @bot.command()
 @commands.is_owner()
 async def setcode(ctx, arg):
-	data["code"] = arg	
+	var data["code"] = arg	
 	with open("config.json") as conf:
-		data = json.load(conf)
+		json.load(conf)
+
+
+@bot.command()
+@commands.is_owner()
+asycn def newcode(ctx):
+	data["code"] = []
+	data["code"].append("1234")
 
 @bot.command()
 async def code(ctx):
