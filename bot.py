@@ -127,7 +127,7 @@ async def free(ctx, *, item):
 	print(rand)
 	await audit(f'The number rolled was: {rand}')
 	if(rand <= 10):
-		await ctx.send(f'Here you go {ctx.author.id} 1 free {item}')
+		await ctx.send(f'Here you go {ctx.author.mention} 1 free {item}')
 	else:
 		await ctx.send(f"I'm sorry {ctx.author.display_name}, {item} is not free. You must purchase your own." )
 
