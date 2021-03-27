@@ -88,6 +88,11 @@ async def ping(ctx):
 	print ('pong')
 
 @bot.command()
+async def marco(ctx):
+	await ctx.send('pong')
+	print ('polo')
+	
+@bot.command()
 @commands.is_owner()
 async def here(ctx):
 	await ctx.send(f'{ctx.message.author} is at the space')
