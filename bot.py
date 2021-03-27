@@ -97,7 +97,7 @@ async def here(ctx):
 @commands.is_owner()
 async def open(ctx):
 	openings= bot.get_channel(int(data["openingsID"]))
-	await ctx.send('On')
+	await ctx.send('The Unit is currently Open')
 	await openings.edit(name="🕓Open")
 	on = True
 	GPIO.output(21, True)
@@ -108,7 +108,7 @@ async def open(ctx):
 @commands.is_owner()
 async def closed(ctx):
 	openings= bot.get_channel(int(data["openingsID"]))
-	await ctx.send('Off')
+	await ctx.send('The Unit is currently Closed')
 	on = False
 	GPIO.output(21, False)
 	await openings.edit(name="🕓Closed")
