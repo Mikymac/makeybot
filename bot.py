@@ -135,21 +135,21 @@ async def free(ctx, *, item):
 @commands.is_owner()
 async def setcode(ctx, arg):
 	data["code"] = arg	
-	with open("config.json") as conf:
+	with open("code.json") as conf:
 		json.load(conf)
 
 
 @bot.command()
 @commands.is_owner()
 async def newcode(ctx):
-	a_file = open("config.json", "r")
+	a_file = open("code.json", "r")
 	json_object = json.load(a_file)
 	a_file.close()
 	print(json_object)
 
 	json_object["code"] = 100
 
-	a_file = open("config.json", "w")
+	a_file = open("code.json", "w")
 	json.dump(json_object, a_file)
 	a_file.close()
 
