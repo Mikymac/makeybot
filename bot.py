@@ -144,7 +144,7 @@ async def setcode(ctx, arg):
 async def newcode(ctx):
 
 	data["data"] = "4321"
-	afile = open("config.json", "w")
+	afile = json.open("config.json", "w")
 	json.dump(data, afile)
 	afile.close()
 	
