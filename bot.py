@@ -141,7 +141,7 @@ async def setcode(ctx, arg):
 
 @bot.command()
 @commands.is_owner()
-asycn def newcode(ctx):
+async def newcode(ctx):
 	data["code"] = []
 	data["code"].append("1234")
 
