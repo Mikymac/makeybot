@@ -135,7 +135,8 @@ async def closed(ctx):
 	keyholder = discord.utils.find(lambda r: r.name == "Keyholder",ctx.guild.roles)
 	if(keyholder in ctx.author.roles or mod in ctx.author.roles ):
 		openings= bot.get_channel(int(data["openingsID"]))
-		openings.send("The Unit is Closed <:make:777970381285490688>")
+		await bot.get_channel(int(data["openingsID"])).purge()
+		await openings.send("The Unit is Closed <:make:777970381285490688>")
 		await audit(f'{ctx.author.display_name} Has used the close command. Automation has been disabled')
 		on = False
 		GPIO.output(21, False)
