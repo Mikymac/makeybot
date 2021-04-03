@@ -172,12 +172,12 @@ async def task():
 					print("Open")
 					await bot.get_channel(int(data["openingsID"])).purge()
 					await openings.send("The Unit is Open <:make:777970381285490688>")
-					await openings.edit(name="makerspace-open")
+					await openings.edit(name="🟢-makerspace-open")
 				else:
 					print("Closed")
 					await bot.get_channel(int(data["openingsID"])).purge()
 					await openings.send("The Unit is Closed <:make:777970381285490688>")
-					await openings.edit(name="makerspace-closed")
+					await openings.edit(name="⛔-makerspace-closed")
 
 			await asyncio.sleep(60)
 
