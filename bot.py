@@ -90,12 +90,14 @@ async def purge(ctx, channel: discord.TextChannel):
 async def disable(ctx):
 	global enabled
 	enabled = False
+	await audit(f'{ctx.message.author.display_name} has disabled automation')
 	
 
 @bot.command()
 async def enable(ctx):
 	global enabled
 	enabled = True
+	await audit(f'{ctx.message.author.display_name} has enabled automation')
 
 @bot.command()
 async def ping(ctx):
