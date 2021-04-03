@@ -133,7 +133,7 @@ async def closed(ctx):
 		await openings.send('The Unit is currently Closed')
 		on = False
 		GPIO.output(21, False)
-		await openings.edit(name="⛔Closed")
+		await openings.edit(name="🔴Closed")
 		await ctx.message.delete()
 
 @bot.command()
