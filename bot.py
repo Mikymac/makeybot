@@ -181,7 +181,7 @@ async def task():
 					await openings.send("The Unit is Closed <:make:777970381285490688>")
 					await openings.edit(name="⛔-makerspace-closed")
 
-			await asyncio.sleep(60)
+		await asyncio.sleep(60)
 
 
 async def audit(message):	
