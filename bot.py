@@ -207,8 +207,13 @@ async def on_member_join(member):
 async def on_ready():
 	print ("Ready To Go")
 	await audit("*Beep Beep* MakeyBot OnLine")
-	curDoor = True
-	doorOpen = True
+	
+	if (GPIO.input(20) == 0):
+		doorOpen = True
+	else:
+		doorOpen = False
+	curDoor = not doorOpen
+	
 	bot.loop.create_task(task())
 
 bot.run(TOKEN)
