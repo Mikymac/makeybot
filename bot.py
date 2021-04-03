@@ -174,7 +174,7 @@ async def task():
 				curDoor = doorOpen
 				if(curDoor == True):
 					print("Open")
-					await openings.send("The Unit is Open :make:")
+					await openings.send("The Unit is Open <:make:777970381285490688>")
 					await openings.edit(name="makerspace-open")
 				else:
 					print("Closed")
