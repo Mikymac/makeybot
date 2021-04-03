@@ -121,14 +121,14 @@ async def open(ctx):
 	if(keyholder in ctx.author.roles or mod in ctx.author.roles ):
 		openings= bot.get_channel(int(data["openingsID"]))
 		await openings.send("The Unit is Open <:make:777970381285490688>")
+		await audit(f'{ctx.author.display_name} Has used the open command. Automation has been disabled')
 		await openings.edit(name="🟢-makerspace-open")
 		on = True
 		GPIO.output(21, True)
 		await ctx.message.delete()
 		global enabled
 		enabled = false
-		await audit(f'{ctx.author.display_name} Has used the open command. Automation has been disabled')
-
+		
 
 @bot.command()
 async def closed(ctx):
@@ -136,14 +136,14 @@ async def closed(ctx):
 	if(keyholder in ctx.author.roles or mod in ctx.author.roles ):
 		openings= bot.get_channel(int(data["openingsID"]))
 		openings.send("The Unit is Closed <:make:777970381285490688>")
+		await audit(f'{ctx.author.display_name} Has used the close command. Automation has been disabled')
 		on = False
 		GPIO.output(21, False)
 		await openings.edit(name="🔴-makerspace-closed")
 		await ctx.message.delete()
 		global enabled
 		enabled = false
-		await audit(f'{ctx.author.display_name} Has used the close command. Automation has been disabled')
-
+		
 @bot.command()
 async def free(ctx, *, item):
 	rand = random.randint(0,99)
