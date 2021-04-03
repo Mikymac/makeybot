@@ -84,7 +84,7 @@ async def purge(ctx, channel: discord.TextChannel):
 	admin = discord.utils.find(lambda r: r.name == "Admin",ctx.guild.roles)
 	if(admin in ctx.author.roles or mod in ctx.author.roles ):
 		await channel.purge()
-		await audit(f'{ctx.message.author.display_name} has purged channel')
+		await audit(f'{ctx.message.author.display_name} has purged {channel.name}')
 
 @bot.command()
 async def disable(ctx):
