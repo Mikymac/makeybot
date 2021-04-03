@@ -146,7 +146,7 @@ async def closed(ctx):
 		await openings.edit(name="🔴-makerspace-closed")
 		await ctx.message.delete()
 		global curDoor
-		curDoor = True
+		curDoor = False
 		global enabled
 		enabled = false
 		
