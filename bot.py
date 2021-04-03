@@ -97,6 +97,9 @@ async def disable(ctx):
 async def enable(ctx):
 	global enabled
 	enabled = True
+	global curDoor
+	global doorOpen		
+	curDoor = not doorOpen
 	await audit(f'{ctx.message.author.display_name} has enabled automation')
 
 @bot.command()
@@ -127,9 +130,6 @@ async def open(ctx):
 		on = True
 		GPIO.output(21, True)
 		await ctx.message.delete()
-		global curDoor
-		global doorOpen		
-		curDoor = !doorOpen
 		global enabled
 		enabled = false
 		
@@ -146,9 +146,6 @@ async def closed(ctx):
 		GPIO.output(21, False)
 		await openings.edit(name="🔴-makerspace-closed")
 		await ctx.message.delete()
-		global curDoor
-		global doorOpen		
-		curDoor = !doorOpen
 		global enabled
 		enabled = false
 		
