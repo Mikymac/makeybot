@@ -120,11 +120,14 @@ async def open(ctx):
 	keyholder = discord.utils.find(lambda r: r.name == "Keyholder",ctx.guild.roles)
 	if(keyholder in ctx.author.roles or mod in ctx.author.roles ):
 		openings= bot.get_channel(int(data["openingsID"]))
-		await openings.send('The Unit is currently Open')
-		await openings.edit(name="🟢Open")
+		await openings.send("The Unit is Open <:make:777970381285490688>")
+		await openings.edit(name="🟢-makerspace-open")
 		on = True
 		GPIO.output(21, True)
 		await ctx.message.delete()
+		global enabled
+		enabled = false
+		await audit(f'{ctx.author.display_name} Has used the open command. Automation has been disabled')
 
 
 @bot.command()
@@ -132,11 +135,14 @@ async def closed(ctx):
 	keyholder = discord.utils.find(lambda r: r.name == "Keyholder",ctx.guild.roles)
 	if(keyholder in ctx.author.roles or mod in ctx.author.roles ):
 		openings= bot.get_channel(int(data["openingsID"]))
-		await openings.send('The Unit is currently Closed')
+		openings.send("The Unit is Closed <:make:777970381285490688>")
 		on = False
 		GPIO.output(21, False)
-		await openings.edit(name="🔴Closed")
+		await openings.edit(name="🔴-makerspace-closed")
 		await ctx.message.delete()
+		global enabled
+		enabled = false
+		await audit(f'{ctx.author.display_name} Has used the close command. Automation has been disabled')
 
 @bot.command()
 async def free(ctx, *, item):
@@ -179,7 +185,7 @@ async def task():
 					print("Closed")
 					await bot.get_channel(int(data["openingsID"])).purge()
 					await openings.send("The Unit is Closed <:make:777970381285490688>")
-					await openings.edit(name="⛔-makerspace-closed")
+					await openings.edit(name="🔴-makerspace-closed")
 
 		await asyncio.sleep(60)
 
