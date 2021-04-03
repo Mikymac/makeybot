@@ -127,6 +127,8 @@ async def open(ctx):
 		on = True
 		GPIO.output(21, True)
 		await ctx.message.delete()
+		global curDoor
+		curDoor = True
 		global enabled
 		enabled = false
 		
@@ -143,6 +145,8 @@ async def closed(ctx):
 		GPIO.output(21, False)
 		await openings.edit(name="🔴-makerspace-closed")
 		await ctx.message.delete()
+		global curDoor
+		curDoor = True
 		global enabled
 		enabled = false
 		
