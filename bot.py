@@ -69,8 +69,8 @@ async def idcall(ctx, *, test: discord.TextChannel):
 
 @bot.command()
 async def send(ctx, channel: discord.TextChannel, *, arg):
-	role = discord.utils.find(lambda r: r.name == "Admin",ctx.guild.roles)
-	if(keyholder in ctx.author.roles or mod in ctx.author.roles ):
+	admin = discord.utils.find(lambda r: r.name == "Admin",ctx.guild.roles)
+	if(admin in ctx.author.roles or mod in ctx.author.roles ):
 		await ctx.message.delete()
 		await audit(f'{ctx.author.display_name} used the send command to say "{arg}" in channel: {channel}')
 		await channel.send(arg)
@@ -81,8 +81,8 @@ async def send(ctx, channel: discord.TextChannel, *, arg):
 @bot.command()
 async def purge(ctx):
 	#await bot.get_channel(int(data["whosinID"])).purge()
-	role = discord.utils.find(lambda r: r.name == "Admin",ctx.guild.roles)
-	if(keyholder in ctx.author.roles or mod in ctx.author.roles ):
+	admin = discord.utils.find(lambda r: r.name == "Admin",ctx.guild.roles)
+	if(admin in ctx.author.roles or mod in ctx.author.roles ):
 		await ctx.purge()
 		await audit(f'{ctx.message.author.display_name} has purged channel')
 
@@ -163,10 +163,6 @@ async def task():
 		if(enabled):
 			if (GPIO.input(20) == 0):
 				doorOpen = True
-				#await led_update()
-				#GPIO.output(26, True)
-				#await asyncio.sleep(3)
-				#GPIO.output(26, False)
 			else:
 				doorOpen = False
 
