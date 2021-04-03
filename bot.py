@@ -36,6 +36,7 @@ bot = commands.Bot(command_prefix='!', intents=intents)
 on = False
 curDoor = False
 doorOpen = False
+enabled = True
 
 def restart_program():
 	python = sys.executable
@@ -69,7 +70,7 @@ async def idcall(ctx, *, test: discord.TextChannel):
 @bot.command()
 async def send(ctx, channel: discord.TextChannel, *, arg):
 	role = discord.utils.find(lambda r: r.name == "Admin",ctx.guild.roles)
-	if(role in ctx.author.roles or ctx.message.author.id == int(data["debugID"])):
+	if(keyholder in ctx.author.roles or mod in ctx.author.roles ):
 		await ctx.message.delete()
 		await audit(f'{ctx.author.display_name} used the send command to say "{arg}" in channel: {channel}')
 		await channel.send(arg)
@@ -79,8 +80,22 @@ async def send(ctx, channel: discord.TextChannel, *, arg):
 
 @bot.command()
 async def purge(ctx):
-	await bot.get_channel(int(data["whosinID"])).purge()
-	await audit(f'{ctx.message.author.display_name} has purged channel')
+	#await bot.get_channel(int(data["whosinID"])).purge()
+	role = discord.utils.find(lambda r: r.name == "Admin",ctx.guild.roles)
+	if(keyholder in ctx.author.roles or mod in ctx.author.roles ):
+		await ctx.purge()
+		await audit(f'{ctx.message.author.display_name} has purged channel')
+
+@bot.command()
+async def disable(ctx):
+	global enabled
+	enabled = False
+	
+
+@bot.command()
+async def enable(ctx):
+	global enabled
+	enabled = True
 
 @bot.command()
 async def ping(ctx):
@@ -145,43 +160,29 @@ async def task():
 	
 	openings = bot.get_channel(int(data["openingsID"]))
 	while True:
-		if (GPIO.input(20) == 0):
-			doorOpen = True
-			#await led_update()
-			#GPIO.output(26, True)
-			#await asyncio.sleep(3)
-			#GPIO.output(26, False)
-		else:
-			doorOpen = False
-					
-		if(doorOpen != curDoor):
-			curDoor = doorOpen
-			if(curDoor == True):
-				print("Open")
-				await openings.send("Open")
-				#await openings.edit(name="Open")
+		if(enabled):
+			if (GPIO.input(20) == 0):
+				doorOpen = True
+				#await led_update()
+				#GPIO.output(26, True)
+				#await asyncio.sleep(3)
+				#GPIO.output(26, False)
 			else:
-				print("Cloased")
-				await openings.send("Closed")
-				#await openings.edit(name="Closed")
-					
-					
-		await asyncio.sleep(.1)
+				doorOpen = False
 
-#async def led_update():
-#	global on
-#	openings= bot.get_channel(787078050679488512)
-#
-#	if(on == True):
-#		GPIO.output(21, True)
-#		GPIO.output(16, False)
-#		on = False
-#		await openings.edit(name="Open")
-#	else:
-#		GPIO.output(21, False)
-#		GPIO.output(16, True)
-#		on = True
-#		await openings.edit(name="Closed")
+			if(doorOpen != curDoor):
+				curDoor = doorOpen
+				if(curDoor == True):
+					print("Open")
+					await openings.send("The Unit is Open :make:")
+					await openings.edit(name="makerspace-open")
+				else:
+					print("Closed")
+					await openings.send("The Unit is Closed :make:")
+					await openings.edit(name="makerspace-closed")
+
+			await asyncio.sleep(60)
+
 
 async def audit(message):	
 	await bot.get_channel(int(data["auditID"])).send(message)
@@ -189,7 +190,7 @@ async def audit(message):
 @bot.event
 async def on_member_join(member):
 	print("Test")
-	await bot.get_channel(int(data["introID"])).send(f"Welcome to the MakeGosport Discord server {member.mention}, feel free to introduce yourself and what are your interests. Firstly, Hi I'm MakeyBot. I'm here to help out around the server automating whats possible to automate, nice to meet you.")
+	await bot.get_channel(int(data["introID"])).send(f"Welcome {member.mention} to the MAKEGosport Discord. When you have a moment please read throgh the welcome-and-rules channel. I'm sure everyone will welcome you to the space in due course.")
 
 @bot.event
 async def on_ready():
@@ -200,5 +201,3 @@ async def on_ready():
 	bot.loop.create_task(task())
 
 bot.run(TOKEN)
-
-
