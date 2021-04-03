@@ -170,10 +170,12 @@ async def task():
 				curDoor = doorOpen
 				if(curDoor == True):
 					print("Open")
+					await bot.get_channel(int(data["openingsID"])).purge()
 					await openings.send("The Unit is Open <:make:777970381285490688>")
 					await openings.edit(name="makerspace-open")
 				else:
 					print("Closed")
+					await bot.get_channel(int(data["openingsID"])).purge()
 					await openings.send("The Unit is Closed <:make:777970381285490688>")
 					await openings.edit(name="makerspace-closed")
 
