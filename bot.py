@@ -28,9 +28,9 @@ curDoor = False
 doorOpen = False
 enabled = True
 
-int keyholder
-int mod
-int admin
+keyholder = None
+mod = None
+admin = None
 
 def restart_program():
 	python = sys.executable
