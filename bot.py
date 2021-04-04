@@ -198,7 +198,7 @@ async def on_member_join(member):
 	await bot.get_channel(int(data["introID"])).send(f"Welcome {member.mention} to the MAKEGosport Discord. When you have a moment please read throgh the welcome-and-rules channel. I'm sure everyone will welcome you to the space in due course.")
 
 @bot.event
-async def on_ready():
+async def on_ready(ctx):
 	print ("Ready To Go")
 	await audit("*Beep Beep* MakeyBot OnLine")
 	
@@ -212,9 +212,9 @@ async def on_ready():
 	global admin
 	global mod
 
-	keyholder = discord.utils.find(lambda r: r.name == "Keyholder",bot.guild.roles)
-	admin = discord.utils.find(lambda r: r.name == "Admin",bot.guild.roles)
-	mod = discord.utils.find(lambda r: r.name == "Moderator",bot.guild.roles)
+	keyholder = discord.utils.find(lambda r: r.name == "Keyholder",ctx.guild.roles)
+	admin = discord.utils.find(lambda r: r.name == "Admin",ctx.guild.roles)
+	mod = discord.utils.find(lambda r: r.name == "Moderator",ctx.guild.roles)
 
 	bot.loop.create_task(task())
 
