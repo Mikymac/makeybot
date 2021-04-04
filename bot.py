@@ -192,6 +192,14 @@ async def task():
 async def audit(message):	
 	await bot.get_channel(int(data["auditID"])).send(message)
 
+async def populateRoles():	
+	global keyholder
+	global admin
+	global mod
+	keyholder = discord.utils.find(lambda r: r.name == "Keyholder",openings. )
+	admin = discord.utils.find(lambda r: r.name == "Admin",ctx.guild.roles)
+	mod = discord.utils.find(lambda r: r.name == "Moderator",ctx.guild.roles)
+
 @bot.event
 async def on_member_join(member):
 	print("Test")
@@ -208,13 +216,11 @@ async def on_ready():
 		doorOpen = False
 	curDoor = not doorOpen
 	
-	global keyholder
-	global admin
-	global mod
+	for guild in bot.guilds:
+		print(guild.id)
 
-	keyholder = discord.utils.find(lambda r: r.name == "Keyholder",bot.get_guild.roles)
-	admin = discord.utils.find(lambda r: r.name == "Admin",bot.get_guild.roles)
-	mod = discord.utils.find(lambda r: r.name == "Moderator",bot.get_guild.roles)
+
+
 
 	bot.loop.create_task(task())
 
