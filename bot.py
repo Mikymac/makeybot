@@ -217,7 +217,7 @@ async def on_ready():
 	curDoor = not doorOpen
 	
 	for guild in bot.guilds:
-		print(guild.id)
+		print(guild.name)
 
 
 
