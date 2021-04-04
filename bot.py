@@ -198,7 +198,7 @@ async def on_member_join(member):
 	await bot.get_channel(int(data["introID"])).send(f"Welcome {member.mention} to the MAKEGosport Discord. When you have a moment please read throgh the welcome-and-rules channel. I'm sure everyone will welcome you to the space in due course.")
 
 @bot.event
-async def on_ready(ctx):
+async def on_ready():
 	print ("Ready To Go")
 	await audit("*Beep Beep* MakeyBot OnLine")
 	
