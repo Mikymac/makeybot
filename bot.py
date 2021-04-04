@@ -215,9 +215,9 @@ async def on_ready():
 	
 	for guild in bot.guilds:
 		print(guild.name)
-		keyholder = discord.utils.find(lambda r: r.name == "Keyholder",ctx.guild.roles)
-		admin = discord.utils.find(lambda r: r.name == "Admin",ctx.guild.roles)
-		mod = discord.utils.find(lambda r: r.name == "Moderator",ctx.guild.roles)
+		keyholder = discord.utils.find(lambda r: r.name == "Keyholder", guild.roles)
+		admin = discord.utils.find(lambda r: r.name == "Admin", guild.roles)
+		mod = discord.utils.find(lambda r: r.name == "Moderator", guild.roles)
 
 	bot.loop.create_task(task())
 
