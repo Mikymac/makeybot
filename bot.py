@@ -208,9 +208,13 @@ async def on_ready():
 		doorOpen = False
 	curDoor = not doorOpen
 	
-	global keyholder = discord.utils.find(lambda r: r.name == "Keyholder",ctx.guild.roles)
-	global admin = discord.utils.find(lambda r: r.name == "Admin",ctx.guild.roles)
-	global mod = discord.utils.find(lambda r: r.name == "Moderator",ctx.guild.roles)
+	global keyholder
+	global admin
+	global mod
+
+	keyholder = discord.utils.find(lambda r: r.name == "Keyholder",ctx.guild.roles)
+	admin = discord.utils.find(lambda r: r.name == "Admin",ctx.guild.roles)
+	mod = discord.utils.find(lambda r: r.name == "Moderator",ctx.guild.roles)
 
 	bot.loop.create_task(task())
 
