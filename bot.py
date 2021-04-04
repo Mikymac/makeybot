@@ -192,7 +192,6 @@ async def task():
 async def audit(message):	
 	await bot.get_channel(int(data["auditID"])).send(message)
 
-async def populateRoles():	
 
 @bot.event
 async def on_member_join(member):
