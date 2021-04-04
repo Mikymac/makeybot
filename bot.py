@@ -11,18 +11,9 @@ import random
 with open("config.json") as conf:
 	data = json.load(conf)
 
-#TEST numero dos
-
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
-GPIO.setup(21, GPIO.OUT)
-GPIO.setup(16, GPIO.OUT)
-GPIO.setup(26, GPIO.OUT)
 GPIO.setup(20, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-
-GPIO.output(21, False)
-GPIO.output(16, False)
-GPIO.output(26, False)
 
 TOKEN = data["TOKEN"]
 
@@ -32,11 +23,14 @@ intents.members = True
 
 bot = commands.Bot(command_prefix='!', intents=intents)
 
-
 on = False
 curDoor = False
 doorOpen = False
 enabled = True
+
+var keyholder
+var mod
+var admin
 
 def restart_program():
 	python = sys.executable
@@ -214,6 +208,10 @@ async def on_ready():
 		doorOpen = False
 	curDoor = not doorOpen
 	
+	global keyholder = discord.utils.find(lambda r: r.name == "Keyholder",ctx.guild.roles)
+	global admin = discord.utils.find(lambda r: r.name == "Admin",ctx.guild.roles)
+	global mod = discord.utils.find(lambda r: r.name == "Moderator",ctx.guild.roles)
+
 	bot.loop.create_task(task())
 
 bot.run(TOKEN)
