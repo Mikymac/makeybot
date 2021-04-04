@@ -213,8 +213,8 @@ async def on_ready(ctx):
 	global mod
 
 	keyholder = discord.utils.find(lambda r: r.name == "Keyholder",bot.get_guild.roles)
-	admin = discord.utils.find(lambda r: r.name == "Admin",ctx.guild.roles)
-	mod = discord.utils.find(lambda r: r.name == "Moderator",ctx.guild.roles)
+	admin = discord.utils.find(lambda r: r.name == "Admin",bot.get_guild.roles)
+	mod = discord.utils.find(lambda r: r.name == "Moderator",bot.get_guild.roles)
 
 	bot.loop.create_task(task())
 
