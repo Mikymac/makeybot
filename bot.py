@@ -75,7 +75,7 @@ async def send(ctx, channel: discord.TextChannel, *, arg):
 async def purge(ctx, channel: discord.TextChannel):
 	#await bot.get_channel(int(data["whosinID"])).purge()
 	if(admin in ctx.author.roles or mod in ctx.author.roles ):
-		await ctx.get_channel.purge()
+		await ctx.channel.purge()
 		await audit(f'{ctx.message.author.display_name} has purged {channel.name}')
 
 @bot.command()
