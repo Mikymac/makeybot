@@ -63,7 +63,6 @@ async def idcall(ctx, *, test: discord.TextChannel):
 
 @bot.command()
 async def send(ctx, channel: discord.TextChannel, *, arg):
-	#admin = discord.utils.find(lambda r: r.name == "Admin",ctx.guild.roles)
 	if(admin in ctx.author.roles or mod in ctx.author.roles ):
 		await ctx.message.delete()
 		await audit(f'{ctx.author.display_name} used the send command to say "{arg}" in channel: {channel}')
@@ -75,9 +74,8 @@ async def send(ctx, channel: discord.TextChannel, *, arg):
 @bot.command()
 async def purge(ctx, channel: discord.TextChannel):
 	#await bot.get_channel(int(data["whosinID"])).purge()
-	#admin = discord.utils.find(lambda r: r.name == "Admin",ctx.guild.roles)
 	if(admin in ctx.author.roles or mod in ctx.author.roles ):
-		await channel.purge()
+		await ctx.get_channel.purge()
 		await audit(f'{ctx.message.author.display_name} has purged {channel.name}')
 
 @bot.command()
@@ -114,7 +112,6 @@ async def here(ctx):
 
 @bot.command()
 async def open(ctx):
-	#keyholder = discord.utils.find(lambda r: r.name == "Keyholder",ctx.guild.roles)
 	if(keyholder in ctx.author.roles or mod in ctx.author.roles ):
 		openings= bot.get_channel(int(data["openingsID"]))
 		await bot.get_channel(int(data["openingsID"])).purge()
@@ -130,7 +127,6 @@ async def open(ctx):
 
 @bot.command()
 async def closed(ctx):
-	#keyholder = discord.utils.find(lambda r: r.name == "Keyholder",ctx.guild.roles)
 	if(keyholder in ctx.author.roles or mod in ctx.author.roles ):
 		openings= bot.get_channel(int(data["openingsID"]))
 		await bot.get_channel(int(data["openingsID"])).purge()
@@ -191,7 +187,6 @@ async def task():
 
 async def audit(message):	
 	await bot.get_channel(int(data["auditID"])).send(message)
-
 
 @bot.event
 async def on_member_join(member):
