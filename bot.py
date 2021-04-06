@@ -95,10 +95,11 @@ async def code(ctx):
 
 @bot.command()
 async def appendConfig(ctx, id, *, entry):
-	async with aiofiles.open("toAppend.txt", "a+") as appenfile:
-		await appenfile.writelines(id + "\n")
-		await appenfile.writelines(entry)
-	restart_program()
+	if(int(data["debugID"]) == ctx.author.ID)	
+		async with aiofiles.open("toAppend.txt", "a+") as appenfile:
+			await appenfile.writelines(id + "\n")
+			await appenfile.writelines(entry)
+		restart_program()
 
 @bot.command()
 @commands.is_owner()
