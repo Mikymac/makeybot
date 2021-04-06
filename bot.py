@@ -17,7 +17,7 @@ with open("config.json", "r+") as conf:
 			newdict = {content[0].strip('\n'): content[1].strip('\n')}
 			appen.truncate(0)
 			data.update(newdict)
-			conf.seek(0)
+			os.remove("toAppend.txt")
 			json.dump(data, conf, ensure_ascii=False, indent=4)
 			print("Should've done soemthing")
 	except:
