@@ -31,9 +31,8 @@ keyholder = None
 mod = None
 admin = None
 
-def writecode():
-	with open("/home/pi/makeybot/code.txt", "a+") as test:
-		print("123")
+with open("/home/pi/makeybot/code.txt", "a+") as test:
+	print("123")
 
 def restart_program():
 	python = sys.executable
