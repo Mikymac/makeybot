@@ -57,7 +57,7 @@ async def restart(ctx):
 @bot.command()
 async def poweroff(ctx):
 	if(admin in ctx.author.roles or data["debugID"] in ctx.author.id):
-		await audit("Bot Powering Down. I will need to be powered on again manually.")
+		await audit(f'{ctx.author.display_name} has Powered me Down. I will need to be powered on again manually.')
 		await bot.logout()
 
 @bot.command()
