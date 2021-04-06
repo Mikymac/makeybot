@@ -64,7 +64,7 @@ async def poweroff(ctx):
 
 @bot.command()
 async def setcode(ctx, code):
-	with aopen("/home/pi/makeybot/code.txt", "a+") as test:
+	with open("/home/pi/makeybot/code.txt", "a+") as test:
 		test.write("123")
 
 @bot.command()
