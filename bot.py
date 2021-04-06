@@ -19,9 +19,9 @@ with open("config.json", "r+") as conf:
 			os.remove("toAppend.txt")
 			data.update(newdict)
 			json.dump(data, conf, ensure_ascii=False, indent=4)
-			print("Should've done soemthing")
+			print("Updated local config")
 	except:
-		print("except")
+
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
@@ -42,7 +42,6 @@ enabled = True
 keyholder = None
 mod = None
 admin = None
-
 
 def restart_program():
 	python = sys.executable
@@ -73,6 +72,12 @@ async def poweroff(ctx):
 		await bot.logout()
 	else:
 		await audit(f'')
+
+@bot.command()
+async def test(ctx):	
+	async with aiofiles.open("config.json", "a+") as test:
+		data2 = json.load(test)
+		print(data2)
 
 @bot.command()
 async def setcode(ctx, code):
