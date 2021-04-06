@@ -53,14 +53,14 @@ async def restart(ctx):
 	await ctx.message.delete()
 	restart_program()
 
-	def finalize(self):
-        print('Finalizing the Class')
+def finalize(self):
+    print('Finalizing the Class')
 
-    def __exit__(self, exc_type, exc_val, exc_tb):
-        self.finalize()
+def __exit__(self, exc_type, exc_val, exc_tb):
+    self.finalize()
 
-    def __enter__(self):
-        return self
+def __enter__(self):
+    return self
 
 @bot.command()
 async def poweroff(ctx):
