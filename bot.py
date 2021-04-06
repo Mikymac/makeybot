@@ -8,8 +8,6 @@ import os
 import sys
 import random
 
-with open("config.json") as conf:
-	data = json.load(conf)
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
@@ -30,9 +28,10 @@ enabled = True
 keyholder = None
 mod = None
 admin = None
+data = None
 
-with open("/home/pi/makeybot/code.txt", "a+") as test:
-	test.write("123")
+#with open("/home/pi/makeybot/code.txt", "a+") as test:
+#	test.write("123")
 
 def restart_program():
 	python = sys.executable
@@ -223,6 +222,11 @@ async def on_ready():
 	global keyholder
 	global admin
 	global mod
+	global data
+
+	
+	with open("config.json") as conf:
+		data = json.load(conf)
 	
 	for guild in bot.guilds:
 		print(guild.name)
