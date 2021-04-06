@@ -14,7 +14,7 @@ with open("config.json", "r+") as conf:
 	#try:
 	with open("toAppend.txt") as appen:
 		content = appen.readlines()
-		newdict = {content[0]: content[1]}
+		newdict = {str(content[0]): str(content[1])}
 		data.update(newdict)
 		conf.seek(0)
 		json.dump(data, conf, ensure_ascii=False, indent=4)
