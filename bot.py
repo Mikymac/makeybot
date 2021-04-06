@@ -16,7 +16,7 @@ with open("config.json", "r+") as conf:
 		content = appen.readlines()
 		newdict = {content[0]: content[1]}
 		data.update(newdict)
-		data.seek(0)
+		conf.seek(0)
 		json.dump(data, conf)
 		print("Should've done soemthing")
 	#except:
