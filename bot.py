@@ -74,7 +74,7 @@ async def setcode(ctx, code):
 @bot.command()
 async def code(ctx):
 	async with aiofiles.open("code.txt", "r") as codefile:
-		await ctx.channel.send(f'{codefile.read()}')
+		await ctx.channel.send(f'{await codefile.read()}')
 
 @bot.command()
 @commands.is_owner()
