@@ -68,7 +68,8 @@ async def setcode(ctx, code):
 	print(code)
 	async with aiofiles.open("code.txt", "a+") as test:
 		await test.write(code)
-		print(await test)
+		test.seek(0)
+		print(await test.read())
 
 @bot.command()
 async def code(ctx):
