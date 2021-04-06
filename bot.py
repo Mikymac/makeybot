@@ -7,6 +7,7 @@ import git
 import os
 import sys
 import random
+import aiofiles
 
 with open("config.json") as conf:
 	data = json.load(conf)
@@ -64,7 +65,9 @@ async def poweroff(ctx):
 
 @bot.command()
 async def setcode(ctx, code):
-	await test()
+	await with aiofiles.open("code.txt", "r") as test:
+		content = await test.read()
+		print(content)
 
 @asyncio.coroutine
 def test():
