@@ -8,6 +8,8 @@ import os
 import sys
 import random
 
+with open("config.json") as conf:
+	data = json.load(conf)
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
@@ -28,7 +30,6 @@ enabled = True
 keyholder = None
 mod = None
 admin = None
-data = None
 
 #with open("/home/pi/makeybot/code.txt", "a+") as test:
 #	test.write("123")
@@ -47,6 +48,26 @@ async def update(ctx):
 	repo.git.pull()
 	print("Post Pull")
 	restart_program()
+
+@bot.command()
+async def cmd(ctx):
+    if os.path.isfile("file.json"):
+        with open("file.json", "r") as fp:
+            data = json.load(fp) # loads the file contents into a dict with name data
+        data["users"].append(ctx.author.id) # add author's id to a list with key 'users'
+    else: # creating dict for json file if the file doesn't exist
+        data = {
+            "users": []
+        }
+        data["users"].append(ctx.author.id)
+
+    # outside of if statement as we're writing to the file no matter what
+    with open("file.json", "w+") as fp:
+        json.dump(data, fp, sort_keys=True, indent=4) # kwargs are for formatting
+
+    print(data) # you're still able to access the dict after closing the file
+    await ctx.send("Successfully updated a file!")
+
 
 @bot.command()
 @commands.is_owner()
@@ -222,11 +243,6 @@ async def on_ready():
 	global keyholder
 	global admin
 	global mod
-	global data
-
-	
-	with open("config.json") as conf:
-		data = json.load(conf)
 	
 	for guild in bot.guilds:
 		print(guild.name)
