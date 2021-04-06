@@ -64,8 +64,13 @@ async def poweroff(ctx):
 
 @bot.command()
 async def setcode(ctx, code):
+	await test()
+
+@asyncio.coroutine
+def test():
 	with open("/home/pi/makeybot/code.txt", "a+") as test:
-		test.write("123")
+		test.write("1234")
+
 
 @bot.command()
 @commands.is_owner()
