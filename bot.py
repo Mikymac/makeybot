@@ -76,7 +76,7 @@ async def poweroff(ctx):
 
 @bot.command()
 async def setcode(ctx, code):
-	if(admin in ctx.author.roles or mod in ctx.author.roles)
+	if(admin in ctx.author.roles or mod in ctx.author.roles):
 		async with aiofiles.open("code.txt", "a+") as codefile:
 			await codefile.truncate(0)
 			await codefile.write(code)
@@ -87,9 +87,11 @@ async def setcode(ctx, code):
 
 @bot.command()
 async def code(ctx):
-	if(keyholder in ctx.author.roles)
+	if(keyholder in ctx.author.roles):
 		async with aiofiles.open("code.txt", "r") as codefile:
 			await bot.get_channel(int(data["keyID"])).send(f'The door code is {await codefile.read()}, try to remember it this time.')
+	
+	await audit(f'{ctx.author.display_name} has attempted to receive the code.')
 
 @bot.command()
 async def appendConfig(ctx, id, *, entry):
