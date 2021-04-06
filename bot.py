@@ -75,20 +75,21 @@ async def poweroff(ctx):
 		await audit(f'')
 
 @bot.command()
-async def test(ctx):	
-	print(data)
-
-@bot.command()
 async def setcode(ctx, code):
-	print(code)
-	async with aiofiles.open("code.txt", "a+") as codefile:
-		await codefile.truncate(0)
-		await codefile.write(code)
+	if(admin in ctx.author.roles or mod in ctx.author.roles)
+		async with aiofiles.open("code.txt", "a+") as codefile:
+			await codefile.truncate(0)
+			await codefile.write(code)
+			await audit(f'{ctx.author.display_name} has set the code to {code}')
+			await ctx.message.delete()
+	else:
+		await audit(f'{ctx.author.display_name} has attempted to set the code.')
 
 @bot.command()
 async def code(ctx):
-	async with aiofiles.open("code.txt", "r") as codefile:
-		await bot.get_channel(int(data["keyID"])).send(f'The door code is {await codefile.read()}, try to remember it this time.')
+	if(keyholder in ctx.author.roles)
+		async with aiofiles.open("code.txt", "r") as codefile:
+			await bot.get_channel(int(data["keyID"])).send(f'The door code is {await codefile.read()}, try to remember it this time.')
 
 @bot.command()
 async def appendConfig(ctx, id, *, entry):
