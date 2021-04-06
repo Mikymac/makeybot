@@ -62,6 +62,11 @@ async def poweroff(ctx):
 		await audit(f'')
 
 @bot.command()
+async def setcode(ctx, code):
+	with open('code.txt', 'w') as codefile:
+		codefile.write(code)
+
+@bot.command()
 @commands.is_owner()
 async def idcall(ctx, *, test: discord.TextChannel):
 	chanID = test.id
