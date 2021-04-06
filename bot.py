@@ -76,9 +76,7 @@ async def poweroff(ctx):
 
 @bot.command()
 async def test(ctx):	
-	async with aiofiles.open("config.json", "a+") as test:
-		data2 = json.load(test)
-		print(data2)
+	print(data)
 
 @bot.command()
 async def setcode(ctx, code):
