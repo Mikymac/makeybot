@@ -31,6 +31,23 @@ keyholder = None
 mod = None
 admin = None
 
+def __init__(self):
+        print('Init')
+
+def simple_method(self):
+     print('Simple Method')
+
+def finalize(self):
+    print('Finalizing the Class')
+
+def __exit__(self, exc_type, exc_val, exc_tb):
+    print('Exit')
+    self.finalize()
+
+def __enter__(self):
+    print('enter')
+    return self
+
 def restart_program():
 	python = sys.executable
 	os.execl(python, python, * sys.argv)
@@ -52,15 +69,6 @@ async def restart(ctx):
 	await audit("I have initiated a restart, please await the online command.")
 	await ctx.message.delete()
 	restart_program()
-
-def finalize(self):
-    print('Finalizing the Class')
-
-def __exit__(self, exc_type, exc_val, exc_tb):
-    self.finalize()
-
-def __enter__(self):
-    return self
 
 @bot.command()
 async def poweroff(ctx):
