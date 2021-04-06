@@ -53,6 +53,15 @@ async def restart(ctx):
 	await ctx.message.delete()
 	restart_program()
 
+	def finalize(self):
+        print('Finalizing the Class')
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        self.finalize()
+
+    def __enter__(self):
+        return self
+
 @bot.command()
 async def poweroff(ctx):
 	if(admin in ctx.author.roles or int(data["debugID"]) == int(ctx.author.id)):
