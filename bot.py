@@ -77,21 +77,21 @@ async def poweroff(ctx):
 @bot.command()
 async def setcode(ctx, code):
 	print(code)
-	async with aiofiles.open("code.txt", "a+") as test:
-		await test.truncate(0)
-		await test.write(code)
-		#print(await test.read())
+	async with aiofiles.open("code.txt", "a+") as codefile:
+		await codefile.truncate(0)
+		await codefile.write(code)
 
 @bot.command()
 async def code(ctx):
 	async with aiofiles.open("code.txt", "r") as codefile:
-		await ctx.channel.send(f'{await codefile.read()}')
+		await bot.get_channel(int(data["keyID"])).send(f'The door code is {codefile.read()}, try to remember it this time.')
 
 @bot.command()
 async def appendConfig(ctx, id, *, entry):
 	async with aiofiles.open("toAppend.txt", "a+") as appenfile:
 		await appenfile.writelines(id + "\n")
 		await appenfile.writelines(entry)
+		restart_program()
 
 @bot.command()
 @commands.is_owner()
