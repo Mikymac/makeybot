@@ -12,7 +12,7 @@ import aiofiles
 with open("config.json", "r+") as conf:
 	data = json.load(conf)
 	#try:
-	with open("toAppend.txt") as appen:
+	with open("toAppend.txt", "r+") as appen:
 		content = appen.readlines()
 		newdict = {content[0].strip('\n'): content[1].strip('\n')}
 		appen.truncate(0)
