@@ -13,7 +13,10 @@ with open("config.json") as conf:
 	data = json.load(conf)
 	try:
 		with open("toAppend.txt") as appen:
-			print("try")
+			content = appen.readlines()
+			newdict = {content[0]: content[1]}
+			data.update(newdict)
+			json.dump(data, conf)
 	except:
 		print("except")
 
