@@ -11,15 +11,15 @@ import aiofiles
 
 with open("config.json") as conf:
 	data = json.load(conf)
-	try:
+	#try:
 		with open("toAppend.txt") as appen:
 			content = appen.readlines()
 			newdict = {content[0]: content[1]}
 			data.update(newdict)
 			json.dump(data, conf)
 			print("Should've done soemthing")
-	except:
-		print("except")
+	#except:
+	#	print("except")
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
