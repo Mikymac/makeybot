@@ -65,8 +65,7 @@ async def poweroff(ctx):
 
 @bot.command()
 async def setcode(ctx, code):
-	print code
-
+	print(code)
 	async with aiofiles.open("code.txt", "a+") as test:
 		test.write(int(code))
 		print(test)
