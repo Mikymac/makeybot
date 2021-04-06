@@ -63,9 +63,9 @@ async def poweroff(ctx):
 
 @bot.command()
 async def setcode(ctx, code):
-	codefile = open("code.txt", "w")
+	await codefile = open("code.txt", "w")
 	await codefile.write(code)
-	codefile.close()
+	await codefile.close()
 
 @bot.command()
 @commands.is_owner()
