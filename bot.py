@@ -20,7 +20,7 @@ with open("config.json", "r+") as conf:
 			data.update(newdict)
 			json.dump(data, conf, ensure_ascii=False, indent=4)
 			print("Updated local config")
-	except:
+		
 
 
 GPIO.setmode(GPIO.BCM)
