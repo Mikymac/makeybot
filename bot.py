@@ -81,14 +81,16 @@ async def setcode(ctx, code):
 		await test.truncate(0)
 		await test.write(code)
 		#print(await test.read())
-	async with open("config.json") as conf:
-		data2 = json.load(conf)
-		print(data2)
 
 @bot.command()
 async def code(ctx):
 	async with aiofiles.open("code.txt", "r") as codefile:
 		await ctx.channel.send(f'{await codefile.read()}')
+
+@bot.command()
+async def appendConfig(ctx, id, *, entry):
+	async with aiofiles.open("toAppend.txt", "r") as appenfile:
+		await appenfile.writelines(id, entry)
 
 @bot.command()
 @commands.is_owner()
