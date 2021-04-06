@@ -94,12 +94,14 @@ async def code(ctx):
 	await audit(f'{ctx.author.display_name} has attempted to receive the code.')
 
 @bot.command()
-async def appendConfig(ctx, id, *, entry):
+async def appendconfig(ctx, id, *, entry):
 	if(int(data["debugID"]) == ctx.author.id):	
 		async with aiofiles.open("toAppend.txt", "a+") as appenfile:
 			await appenfile.writelines(id + "\n")
 			await appenfile.writelines(entry)
 		restart_program()
+	else:
+		await ctx.channel.send(f'User {ctx.author.display_name} is not the Debug User')
 
 @bot.command()
 @commands.is_owner()
