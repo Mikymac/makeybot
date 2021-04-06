@@ -2,7 +2,7 @@ import RPi.GPIO as GPIO
 import discord
 from discord.ext import commands, tasks
 import asyncio
-import json
+#import json
 import git
 import os
 import sys
