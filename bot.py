@@ -7,9 +7,22 @@ import git
 import os
 import sys
 import random
+import aiofiles
 
-with open("config.json") as conf:
+with open("config.json", "r+") as conf:
 	data = json.load(conf)
+	try:
+		conf.seek(0)
+		with open("toAppend.txt", "r+") as appen:
+			content = appen.readlines()
+			newdict = {content[0].strip('\n'): content[1].strip('\n')}
+			os.remove("toAppend.txt")
+			data.update(newdict)
+			json.dump(data, conf, ensure_ascii=False, indent=4)
+			print("Updated local config")
+	except:
+		conf.seek(0)
+
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
@@ -60,6 +73,35 @@ async def poweroff(ctx):
 		await bot.logout()
 	else:
 		await audit(f'')
+
+@bot.command()
+async def setcode(ctx, code):
+	if(admin in ctx.author.roles or mod in ctx.author.roles):
+		async with aiofiles.open("code.txt", "a+") as codefile:
+			await codefile.truncate(0)
+			await codefile.write(code)
+			await audit(f'{ctx.author.display_name} has set the code to {code}')
+			await ctx.message.delete()
+	else:
+		await audit(f'{ctx.author.display_name} has attempted to set the code.')
+
+@bot.command()
+async def code(ctx):
+	if(keyholder in ctx.author.roles):
+		async with aiofiles.open("code.txt", "r") as codefile:
+			await bot.get_channel(int(data["keyID"])).send(f'The door code is {await codefile.read()}, try to remember it this time.')
+			await ctx.message.delete()
+	await audit(f'{ctx.author.display_name} has attempted to receive the code.')
+
+@bot.command()
+async def appendconfig(ctx, id, *, entry):
+	if(int(data["debugID"]) == ctx.author.id):	
+		async with aiofiles.open("toAppend.txt", "a+") as appenfile:
+			await appenfile.writelines(id + "\n")
+			await appenfile.writelines(entry)
+		restart_program()
+	else:
+		await ctx.channel.send(f'User {ctx.author.display_name} is not the Debug User')
 
 @bot.command()
 @commands.is_owner()
