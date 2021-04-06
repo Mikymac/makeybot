@@ -31,22 +31,9 @@ keyholder = None
 mod = None
 admin = None
 
-def __init__(self):
-        print('Init')
-
-def simple_method(self):
-     print('Simple Method')
-
-def finalize(self):
-    print('Finalizing the Class')
-
-def __exit__(self, exc_type, exc_val, exc_tb):
-    print('Exit')
-    self.finalize()
-
-def __enter__(self):
-    print('enter')
-    return self
+def writecode():
+	with open("/home/pi/makeybot/code.txt", "a+") as test:
+		print("123")
 
 def restart_program():
 	python = sys.executable
@@ -80,8 +67,7 @@ async def poweroff(ctx):
 
 @bot.command()
 async def setcode(ctx, code):
-	with open("/home/pi/makeybot/code.txt", "a+") as test:
-		print("123")
+	writecode()
 		#test.write(f'{code}')
 
 @bot.command()
