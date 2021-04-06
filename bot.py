@@ -55,6 +55,11 @@ async def restart(ctx):
 	restart_program()
 
 @bot.command()
+async def poweroff(ctx):
+	await audit("Bot Powering Down. I will need to be powered on again manually.")
+	await bot.logout()
+
+@bot.command()
 @commands.is_owner()
 async def idcall(ctx, *, test: discord.TextChannel):
 	chanID = test.id
@@ -76,7 +81,9 @@ async def purge(ctx):
 	#await bot.get_channel(int(data["whosinID"])).purge()
 	if(admin in ctx.author.roles or mod in ctx.author.roles ):
 		await ctx.channel.purge()
-		await audit(f'{ctx.message.author.display_name} has purged {channel.name}')
+		await audit(f'{ctx.message.author.display_name} has purged {ctx.channel.name}')
+	else:
+		await audit(f'{ctx.message.author.display_name} attempted to purge {ctx.channel.name}')
 
 @bot.command()
 async def disable(ctx):
