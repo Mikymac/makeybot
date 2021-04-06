@@ -12,12 +12,12 @@ import aiofiles
 with open("config.json", "r+") as conf:
 	data = json.load(conf)
 	try:
+		conf.seek(0)
 		with open("toAppend.txt", "r+") as appen:
 			content = appen.readlines()
 			newdict = {content[0].strip('\n'): content[1].strip('\n')}
 			os.remove("toAppend.txt")
 			data.update(newdict)
-			conf.seek(0)
 			json.dump(data, conf, ensure_ascii=False, indent=4)
 			print("Should've done soemthing")
 	except:
