@@ -84,7 +84,7 @@ async def setcode(ctx, code):
 @bot.command()
 async def code(ctx):
 	async with aiofiles.open("code.txt", "r") as codefile:
-		await bot.get_channel(int(data["keyID"])).send(f'The door code is {codefile.read()}, try to remember it this time.')
+		await bot.get_channel(int(data["keyID"])).send(f'The door code is {await codefile.read()}, try to remember it this time.')
 
 @bot.command()
 async def appendConfig(ctx, id, *, entry):
