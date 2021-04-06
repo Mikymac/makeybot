@@ -19,7 +19,6 @@ TOKEN = data["TOKEN"]
 
 intents = discord.Intents.default()
 intents.members = True
-#intents.guilds = True
 
 bot = commands.Bot(command_prefix='!', intents=intents)
 
@@ -60,7 +59,7 @@ async def poweroff(ctx):
 		await audit(f'{ctx.author.display_name} has Powered me Down. I will need to be powered on again manually.')
 		await bot.logout()
 	else:
-		print(ctx.author.id)
+		await audit(f'')
 
 @bot.command()
 @commands.is_owner()
@@ -81,8 +80,8 @@ async def send(ctx, channel: discord.TextChannel, *, arg):
 
 @bot.command()
 async def purge(ctx):
-	#await bot.get_channel(int(data["whosinID"])).purge()
 	if(admin in ctx.author.roles or mod in ctx.author.roles ):
+		await ctx.message.delete()
 		await ctx.channel.purge()
 		await audit(f'{ctx.message.author.display_name} has purged {ctx.channel.name}')
 	else:
@@ -92,8 +91,8 @@ async def purge(ctx):
 async def disable(ctx):
 	global enabled
 	enabled = False
+	await ctx.message.delete()
 	await audit(f'{ctx.message.author.display_name} has disabled automation')
-	
 
 @bot.command()
 async def enable(ctx):
@@ -102,16 +101,17 @@ async def enable(ctx):
 	global curDoor
 	global doorOpen		
 	curDoor = not doorOpen
+	await ctx.message.delete()
 	await audit(f'{ctx.message.author.display_name} has enabled automation')
 
 @bot.command()
 async def ping(ctx):
-	await ctx.send('polo')
+	await ctx.send('pong')
 	print ('pong')
 
 @bot.command()
 async def marco(ctx):
-	await ctx.send('pong')
+	await ctx.send('polo')
 	print ('polo')
 
 @bot.command()
@@ -134,7 +134,6 @@ async def open(ctx):
 		global enabled
 		enabled = false
 		
-
 @bot.command()
 async def closed(ctx):
 	if(keyholder in ctx.author.roles or mod in ctx.author.roles ):
@@ -200,7 +199,6 @@ async def audit(message):
 
 @bot.event
 async def on_member_join(member):
-	print("Test")
 	await bot.get_channel(int(data["introID"])).send(f"Welcome {member.mention} to the MAKEGosport Discord. When you have a moment please read throgh the welcome-and-rules channel. I'm sure everyone will welcome you to the space in due course.")
 
 @bot.event
