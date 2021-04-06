@@ -17,6 +17,7 @@ with open("config.json") as conf:
 			newdict = {content[0]: content[1]}
 			data.update(newdict)
 			json.dump(data, conf)
+			print("Should've done soemthing")
 	except:
 		print("except")
 
