@@ -32,7 +32,7 @@ mod = None
 admin = None
 
 with open("/home/pi/makeybot/code.txt", "a+") as test:
-	print("123")
+	test.write("123")
 
 def restart_program():
 	python = sys.executable
