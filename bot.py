@@ -9,7 +9,7 @@ import sys
 import random
 import aiofiles
 
-with open("config.json") as conf:
+with open("config.json", "r+") as conf:
 	data = json.load(conf)
 	#try:
 	with open("toAppend.txt") as appen:
