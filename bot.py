@@ -11,6 +11,11 @@ import aiofiles
 
 with open("config.json") as conf:
 	data = json.load(conf)
+	try:
+		with open("toAppend.txt") as appen:
+			print("try")
+	except:
+		print("except")
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
