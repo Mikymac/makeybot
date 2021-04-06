@@ -2,7 +2,7 @@ import RPi.GPIO as GPIO
 import discord
 from discord.ext import commands, tasks
 import asyncio
-#import json
+import json
 import git
 import os
 import sys
@@ -64,7 +64,7 @@ async def poweroff(ctx):
 @bot.command()
 async def setcode(ctx, code):
 	codefile = open("code.txt", "w")
-	codefile.write(code)
+	await codefile.write(code)
 	codefile.close()
 
 @bot.command()
