@@ -70,7 +70,7 @@ async def setcode(ctx, code):
 		await test.truncate(0)
 		await test.write(code)
 		#print(await test.read())
-	asycn with open("config.json") as conf:
+	async with open("config.json") as conf:
 		data2 = json.load(conf)
 		print(data2)
 
