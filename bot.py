@@ -60,11 +60,11 @@ async def update(ctx):
 	restart_program()
 
 @bot.command()
-@commands.is_owner()
 async def restart(ctx):
-	await audit("I have initiated a restart, please await the online command.")
-	await ctx.message.delete()
-	restart_program()
+	if(admin in ctx.author.roles or mod in ctx.author.roles ):
+		await audit("I have initiated a restart, please await the online command.")
+		await ctx.message.delete()
+		restart_program()
 
 @bot.command()
 async def poweroff(ctx):
@@ -131,20 +131,22 @@ async def purge(ctx):
 
 @bot.command()
 async def disable(ctx):
-	global enabled
-	enabled = False
-	await ctx.message.delete()
-	await audit(f'{ctx.message.author.display_name} has disabled automation')
+	if(admin in ctx.author.roles or mod in ctx.author.roles ):
+		global enabled
+		enabled = False
+		await ctx.message.delete()
+		await audit(f'{ctx.message.author.display_name} has disabled automation')
 
 @bot.command()
 async def enable(ctx):
-	global enabled
-	enabled = True
-	global curDoor
-	global doorOpen		
-	curDoor = not doorOpen
-	await ctx.message.delete()
-	await audit(f'{ctx.message.author.display_name} has enabled automation')
+	if(admin in ctx.author.roles or mod in ctx.author.roles ):
+		global enabled
+		enabled = True
+		global curDoor
+		global doorOpen		
+		curDoor = not doorOpen
+		await ctx.message.delete()
+		await audit(f'{ctx.message.author.display_name} has enabled automation')
 
 @bot.command()
 async def ping(ctx):
@@ -164,7 +166,7 @@ async def here(ctx):
 
 @bot.command()
 async def open(ctx):
-	if(keyholder in ctx.author.roles or mod in ctx.author.roles ):
+	if(keyholder in ctx.author.roles):
 		openings= bot.get_channel(int(data["openingsID"]))
 		await bot.get_channel(int(data["openingsID"])).purge()
 		await openings.send("The Unit is Open <:make:777970381285490688>")
@@ -178,7 +180,7 @@ async def open(ctx):
 		
 @bot.command()
 async def closed(ctx):
-	if(keyholder in ctx.author.roles or mod in ctx.author.roles ):
+	if(keyholder in ctx.author.roles):
 		openings= bot.get_channel(int(data["openingsID"]))
 		await bot.get_channel(int(data["openingsID"])).purge()
 		await openings.send("The Unit is Closed <:make:777970381285490688>")
