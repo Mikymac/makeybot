@@ -89,7 +89,7 @@ async def setcode(ctx, code):
 async def code(ctx):
 	if(keyholder in ctx.author.roles):
 		async with aiofiles.open("code.txt", "r") as codefile:
-			await bot.get_channel(int(data["keyID"])).send(f'The door code is {await codefile.read()}, try to remember it this time.')
+			await bot.get_channel(int(data["keyID"])).send(f'The door code is {await codefile.read()}.')
 			await ctx.message.delete()
 	await audit(f'{ctx.author.display_name} has attempted to receive the code.')
 
