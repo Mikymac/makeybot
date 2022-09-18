@@ -234,12 +234,14 @@ async def audit(message):
 
 @bot.event
 async def on_message(ctx):
+	await bot.process_commands(ctx)
+	
 	if isinstance(ctx.channel, discord.channel.DMChannel) and ctx.author != bot.user:
 		print("The message's content was: ", ctx.content)
 		await ctx.channel.send('Thank you for your message, this will be reviewed and replied to within 1-2 days, please be patient.')
 		await bot.get_channel(int(data["askadminID"])).send(str(ctx.author.id) + " : " + ctx.author.name + " :  " + ctx.content)
 	if ctx.reference is not None and ctx.author.id == 220696408171347968:
-		await bot.process_commands(ctx)
+		
 		id = ctx.reference.message_id
 		channel = ctx.channel
 		usermessageID = await channel.fetch_message(id)
