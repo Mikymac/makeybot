@@ -95,7 +95,7 @@ async def code(ctx):
 		async with aiofiles.open("code.txt", "r") as codefile:
 			await bot.get_channel(int(data["keyID"])).send(f'The door code is {await codefile.read()}.')
 			await ctx.message.delete()
-	await audit(f'{ctx.author.display_name} has attempted to receive the code. {bot.get_channel(int(data["rulesID"]))}')
+	await audit(f'{ctx.author.display_name} has attempted to receive the code. {bot.get_channel(int(data["rulesID"])).mention}')
 
 @bot.command()
 async def appendconfig(ctx, id, *, entry):
