@@ -233,6 +233,24 @@ async def audit(message):
 	await bot.get_channel(int(data["auditID"])).send(message)
 
 @bot.event
+async def on_message(ctx):
+	if isinstance(ctx.channel, discord.channel.DMChannel) and ctx.author != bot.user:
+		print("The message's content was: ", ctx.content)
+		await ctx.channel.send('Thank you for your message, this will be reviewed and replied to within 1-2 days, please be patient.')
+		await bot.get_channel(int(data["askadminID"])).send(str(ctx.author.id) + " : " + ctx.author.name + " :  " + ctx.content)
+	if ctx.reference is not None and ctx.author.id == 220696408171347968:
+		id = ctx.reference.message_id
+		channel = ctx.channel
+		usermessageID = await channel.fetch_message(id)
+		userID = str(usermessageID.content).split(" : ")
+		try:
+			#await channel.send(userID[0])
+			user = await bot.fetch_user(userID[0])
+			await user.send(ctx.content)
+			await channel.send("Messsage sent successfully")
+		except:
+			await channel.send("ID Not applicable")
+@bot.event
 async def on_member_join(member):
 	await bot.get_channel(int(data["introID"])).send(f"Welcome {member.mention} to the MAKEGosport Discord. When you have a moment please read throgh the welcome-and-rules channel. I'm sure everyone will welcome you to the space in due course.")
 
