@@ -95,7 +95,7 @@ async def code(ctx):
 		async with aiofiles.open("code.txt", "r") as codefile:
 			await bot.get_channel(int(data["keyID"])).send(f'The door code is {await codefile.read()}.')
 			await ctx.message.delete()
-	await audit(f'{ctx.author.display_name} has attempted to receive the code. {bot.get_channel(int(data["rulesID"])).mention}')
+	await audit(f'{ctx.author.display_name} has attempted to receive the code.')
 
 @bot.command()
 async def appendconfig(ctx, id, *, entry):
@@ -255,7 +255,7 @@ async def on_message(ctx):
 			await channel.send("ID Not applicable")
 @bot.event
 async def on_member_join(member):
-	await bot.get_channel(int(data["introID"])).send(f"Welcome {member.mention} to the MAKEGosport Discord. When you have a moment please read throgh the welcome-and-rules channel. I'm sure everyone will welcome you to the space in due course.")
+	await bot.get_channel(int(data["introID"])).send(f"Welcome {member.mention} to the MAKEGosport Discord. When you have a moment please read throgh the {bot.get_channel(int(data["rulesID"])).mention} channel. I'm sure everyone will welcome you to the space in due course.")
 
 @bot.event
 async def on_ready():
