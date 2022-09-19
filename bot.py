@@ -255,7 +255,7 @@ async def on_message(ctx):
 			await channel.send("ID Not applicable")
 @bot.event
 async def on_member_join(member):
-	await bot.get_channel(int(data["introID"])).send("Welcome {member.mention} to the MAKEGosport Discord. When you have a moment please read through the {} channel. I'm sure everyone will welcome you to the space in due course.".format(bot.get_channel(int(data["rulesID"])).mention))
+	await bot.get_channel(int(data["introID"])).send("Welcome {} to the MAKEGosport Discord. When you have a moment please read through the {} channel. I'm sure everyone will welcome you to the space in due course.".format(member.mention, bot.get_channel(int(data["rulesID"])).mention))
 
 @bot.event
 async def on_ready():
