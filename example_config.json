@@ -1,9 +1,0 @@
-
-#rename file to config.json
-
-{
-	"TOKEN": "super secret token ID here",
-	"openingsID": "openings channel ID here",
-	"whosinID": "whosin channel ID here",
-	"adminID":  "admin rold ID here"
-}

@@ -59,12 +59,16 @@ async def update(ctx):
 	print("Post Pull")
 	restart_program()
 
+bot.load_extension("Commands.ping")
+
 @bot.command()
 async def restart(ctx):
 	if(admin in ctx.author.roles or mod in ctx.author.roles ):
 		await audit("I have initiated a restart, please await the online command.")
 		await ctx.message.delete()
 		restart_program()
+
+#bot.load_extension("Commands.poweroff")
 
 @bot.command()
 async def poweroff(ctx):
@@ -134,6 +138,7 @@ async def disable(ctx):
 	if(admin in ctx.author.roles or mod in ctx.author.roles ):
 		global enabled
 		enabled = False
+
 		await ctx.message.delete()
 		await audit(f'{ctx.message.author.display_name} has disabled automation')
 
@@ -143,20 +148,13 @@ async def enable(ctx):
 		global enabled
 		enabled = True
 		global curDoor
-		global doorOpen		
+		global doorOpen
+
 		curDoor = not doorOpen
 		await ctx.message.delete()
 		await audit(f'{ctx.message.author.display_name} has enabled automation')
 
-@bot.command()
-async def ping(ctx):
-	await ctx.send('pong')
-	print ('pong')
-
-@bot.command()
-async def marco(ctx):
-	await ctx.send('polo')
-	print ('polo')
+bot.load_extension("Commands.marco")
 
 @bot.command()
 @commands.is_owner()
@@ -172,12 +170,12 @@ async def open(ctx):
 		await openings.send("The Unit is Open <:make:777970381285490688>")
 		await audit(f'{ctx.author.display_name} Has used the open command. Automation has been disabled')
 		await openings.edit(name="🟢-makerspace-open")
-		on = True
-		GPIO.output(21, True)
+#		on = True
+#		GPIO.output(21, True)
 		await ctx.message.delete()
 		global enabled
 		enabled = false
-		
+
 @bot.command()
 async def closed(ctx):
 	if(keyholder in ctx.author.roles):
@@ -185,22 +183,14 @@ async def closed(ctx):
 		await bot.get_channel(int(data["openingsID"])).purge()
 		await openings.send("The Unit is Closed <:make:777970381285490688>")
 		await audit(f'{ctx.author.display_name} Has used the close command. Automation has been disabled')
-		on = False
-		GPIO.output(21, False)
+#		on = False
+#		GPIO.output(21, False)
 		await openings.edit(name="🔴-makerspace-closed")
 		await ctx.message.delete()
 		global enabled
 		enabled = false
-		
-@bot.command()
-async def free(ctx, *, item):
-	rand = random.randint(0,99)
-	print(rand)
-	await audit(f'The number rolled was: {rand}')
-	if(rand <= 10):
-		await ctx.send(f'Here you go {ctx.author.display_name} 1 free {item}')
-	else:
-		await ctx.send(f"I'm sorry {ctx.author.display_name}, {item} is not free. You must purchase your own." )
+
+bot.load_extension("Commands.free")
 
 @bot.command()
 @commands.is_owner()
@@ -213,8 +203,9 @@ async def task():
 	global on
 	global curDoor
 	global doorOpen
-	
+
 	openings = bot.get_channel(int(data["openingsID"]))
+
 	while True:
 		if(enabled):
 			if (GPIO.input(20) == 0):
@@ -238,12 +229,33 @@ async def task():
 		await asyncio.sleep(60)
 
 
-async def audit(message):	
+async def audit(message):
 	await bot.get_channel(int(data["auditID"])).send(message)
 
 @bot.event
+async def on_message(ctx):
+	await bot.process_commands(ctx)
+	
+	if isinstance(ctx.channel, discord.channel.DMChannel) and ctx.author != bot.user:
+		print("The message's content was: ", ctx.content)
+		await ctx.channel.send('Thank you for your message, this will be reviewed and replied to within 1-2 days, please be patient.')
+		await bot.get_channel(int(data["askadminID"])).send(str(ctx.author.id) + " : " + ctx.author.name + " :  " + ctx.content)
+	if ctx.reference is not None and ctx.author.id == 220696408171347968:
+		
+		id = ctx.reference.message_id
+		channel = ctx.channel
+		usermessageID = await channel.fetch_message(id)
+		userID = str(usermessageID.content).split(" : ")
+		try:
+			#await channel.send(userID[0])
+			user = await bot.fetch_user(userID[0])
+			await user.send(ctx.content)
+			await channel.send("Messsage sent successfully")
+		except:
+			await channel.send("ID Not applicable")
+@bot.event
 async def on_member_join(member):
-	await bot.get_channel(int(data["introID"])).send(f"Welcome {member.mention} to the MAKEGosport Discord. When you have a moment please read throgh the welcome-and-rules channel. I'm sure everyone will welcome you to the space in due course.")
+	await bot.get_channel(int(data["introID"])).send("Welcome {} to the MAKEGosport Discord. When you have a moment please read through the {} channel. I'm sure everyone will welcome you to the space in due course.".format(member.mention, bot.get_channel(int(data["rulesID"])).mention))
 
 @bot.event
 async def on_ready():
