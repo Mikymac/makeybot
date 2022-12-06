@@ -219,6 +219,7 @@ async def task():
 					print("Open")
 					await bot.get_channel(int(data["openingsID"])).purge()
 					await openings.send("The Unit is Open <:make:777970381285490688>")
+					await bot.get_channel(int(data["keyID"])).send(f'Please remember to let other members know how long you will be in for!!')
 					await openings.edit(name="🟢-makerspace-open")
 				else:
 					print("Closed")
